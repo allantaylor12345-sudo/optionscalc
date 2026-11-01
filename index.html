@@ -3,93 +3,23 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Options Profit Calculator – Covered Call, Cash-Secured Put, Spreads & Iron Condor (Free)</title>
+<title>Options Profit Calculator – Covered Call, Cash-Secured Put, Spreads &amp; Iron Condor (Free)</title>
 <meta name="description" content="Free options profit calculator. Visualize P/L for covered calls, cash-secured puts, spreads, iron condors and straddles. Black-Scholes Greeks, breakevens, probability of profit and annualized return.">
 <link rel="canonical" href="https://optionpayoffcalc.com/">
-<meta property="og:title" content="Options Profit Calculator – Free P/L Chart & Greeks">
-<meta property="og:description" content="Covered calls, puts, spreads and iron condors: payoff chart, breakevens, probability of profit and Greeks.">
+<meta property="og:title" content="Options Profit Calculator – Covered Call, Cash-Secured Put, Spreads &amp; Iron Condor (Free)">
+<meta property="og:description" content="Free options profit calculator. Visualize P/L for covered calls, cash-secured puts, spreads, iron condors and straddles. Black-Scholes Greeks, breakevens, probability of profit and annualized return.">
 <meta property="og:type" content="website">
+<meta property="og:url" content="https://optionpayoffcalc.com/">
+<link rel="stylesheet" href="/style.css">
 <!-- ADSENSE: paste the AdSense <script> tag here after approval -->
-<script type="application/ld+json">
-{"@context":"https://schema.org","@graph":[
-{"@type":"WebApplication","name":"Options Profit Calculator","applicationCategory":"FinanceApplication","operatingSystem":"Any","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"}},
-{"@type":"FAQPage","mainEntity":[
-{"@type":"Question","name":"How is the probability of profit calculated?","acceptedAnswer":{"@type":"Answer","text":"It assumes the stock price at expiration follows a lognormal distribution based on the implied volatility you enter, then adds up the probability of every price where the strategy finishes with a profit."}},
-{"@type":"Question","name":"What is the return if called on a covered call?","acceptedAnswer":{"@type":"Answer","text":"It is the premium received plus the gain from the stock price up to the strike, divided by the stock price paid. It is the maximum return of the trade if the shares are assigned at expiration."}},
-{"@type":"Question","name":"Are the option prices real market quotes?","acceptedAnswer":{"@type":"Answer","text":"No. Prices are theoretical Black-Scholes values from your inputs. Replace them with the actual bid/ask from your broker for exact results."}},
-{"@type":"Question","name":"Is my data sent to a server?","acceptedAnswer":{"@type":"Answer","text":"No. All calculations run in your browser. Nothing you type is uploaded or stored."}}
-]}]}
-</script>
-<style>
-:root{--bg:#f6f7f9;--card:#fff;--ink:#16202c;--mut:#5b6876;--line:#e3e7ec;--acc:#2563eb;--pos:#0f9d58;--neg:#d93025}
-*{box-sizing:border-box}
-body{margin:0;font:15px/1.5 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;background:var(--bg);color:var(--ink)}
-header{background:var(--card);border-bottom:1px solid var(--line)}
-.wrap{max-width:1180px;margin:0 auto;padding:0 16px}
-header .wrap{display:flex;align-items:center;justify-content:space-between;height:56px}
-.logo{font-weight:700;font-size:18px;color:var(--ink);text-decoration:none}
-.logo span{color:var(--acc)}
-h1{font-size:26px;margin:22px 0 4px}
-.sub{color:var(--mut);margin:0 0 18px}
-.grid{display:grid;grid-template-columns:380px 1fr;gap:16px}
-@media(max-width:900px){.grid{grid-template-columns:1fr}}
-.card{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:16px}
-.card h2{font-size:15px;margin:0 0 12px;text-transform:uppercase;letter-spacing:.04em;color:var(--mut)}
-label{display:block;font-size:12px;color:var(--mut);margin-bottom:3px}
-input,select{width:100%;padding:8px 9px;border:1px solid var(--line);border-radius:7px;font:inherit;background:#fff;color:var(--ink)}
-input:focus,select:focus{outline:2px solid #bfd3fb;border-color:var(--acc)}
-.row{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:10px}
-.row3{grid-template-columns:1fr 1fr 1fr}
-.desc{font-size:13px;color:var(--mut);margin:6px 0 12px;min-height:38px}
-table.legs{width:100%;border-collapse:collapse;font-size:13px;table-layout:fixed}
-table.legs th:nth-child(1),table.legs th:nth-child(2){width:72px}table.legs th:nth-child(3){width:50px}table.legs th:nth-child(6){width:24px}
-table.legs select{padding:6px 2px}
-table.legs input::-webkit-inner-spin-button,table.legs input::-webkit-outer-spin-button{-webkit-appearance:none;margin:0}table.legs input[type=number]{-moz-appearance:textfield;appearance:textfield}
-table.legs th{font-weight:500;color:var(--mut);text-align:left;padding:0 3px 4px}
-table.legs td{padding:2px 3px}
-table.legs input,table.legs select{padding:6px 5px;font-size:13px}
-.manual{border-color:#f0b429!important}
-.x{border:0;background:none;color:var(--mut);cursor:pointer;font-size:16px;padding:4px}
-.btns{display:flex;gap:8px;flex-wrap:wrap;margin-top:10px}
-button.b{border:1px solid var(--line);background:#fff;border-radius:7px;padding:7px 11px;font:inherit;font-size:13px;cursor:pointer;color:var(--ink)}
-button.b.pri{background:var(--acc);border-color:var(--acc);color:#fff}
-.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-bottom:14px}
-@media(max-width:600px){.stats{grid-template-columns:repeat(2,1fr)}}
-.stat{background:var(--bg);border-radius:8px;padding:9px 11px}
-.stat .k{font-size:12px;color:var(--mut)}
-.stat .v{font-size:18px;font-weight:650;font-variant-numeric:tabular-nums}
-.pos{color:var(--pos)}.neg{color:var(--neg)}
-#chartBox{position:relative;height:360px}
-#chart{width:100%;height:100%;display:block}
-#tip{position:absolute;pointer-events:none;background:#16202cee;color:#fff;font-size:12px;padding:6px 8px;border-radius:6px;display:none;white-space:nowrap}
-.legend{display:flex;gap:16px;font-size:12px;color:var(--mut);margin:6px 0 4px;flex-wrap:wrap;align-items:center}
-.legend i{display:inline-block;width:18px;height:0;border-top:2px solid var(--acc);vertical-align:middle;margin-right:5px}
-.legend i.d{border-top:2px dashed #8a6df1}
-.slider{display:flex;align-items:center;gap:10px;font-size:13px;color:var(--mut)}
-.slider input{flex:1;padding:0}
-.greeks{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-top:14px}
-table.pl{width:100%;border-collapse:collapse;font-size:13px;font-variant-numeric:tabular-nums}
-table.pl th,table.pl td{padding:6px 8px;border-bottom:1px solid var(--line);text-align:right}
-table.pl th:first-child,table.pl td:first-child{text-align:left}
-table.pl tr.cur{background:#eef3fe}
-.ad-slot{margin:18px 0;min-height:100px;border:1px dashed var(--line);border-radius:8px;display:flex;align-items:center;justify-content:center;color:#aab3bd;font-size:12px}
-article{max-width:820px}
-article h2{font-size:21px;margin-top:30px}
-article h3{font-size:16px;margin-bottom:4px}
-article p,article li{color:#2c3946}
-code{background:#eef1f4;padding:1px 5px;border-radius:4px;font-size:13px}
-footer{margin-top:40px;border-top:1px solid var(--line);background:var(--card);color:var(--mut);font-size:13px}
-footer .wrap{padding:18px 16px}
-.toast{position:fixed;bottom:20px;left:50%;transform:translateX(-50%);background:#16202c;color:#fff;padding:8px 14px;border-radius:8px;font-size:13px;display:none}
-</style>
+<script type="application/ld+json">{"@context": "https://schema.org", "@graph": [{"@type": "WebApplication", "name": "Options Profit Calculator", "url": "https://optionpayoffcalc.com/", "applicationCategory": "FinanceApplication", "operatingSystem": "Any", "offers": {"@type": "Offer", "price": "0", "priceCurrency": "USD"}}, {"@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "How is the probability of profit calculated?", "acceptedAnswer": {"@type": "Answer", "text": "The stock price at expiration is modeled as lognormal, using the implied volatility you entered. The calculator adds up the probability of every price at which the strategy finishes with a profit. It is an estimate, not a guarantee."}}, {"@type": "Question", "name": "Are the option prices real market quotes?", "acceptedAnswer": {"@type": "Answer", "text": "No. They are theoretical Black-Scholes values from your inputs. For exact results, type the real prices from your broker into the Price column."}}, {"@type": "Question", "name": "Does this include commissions and taxes?", "acceptedAnswer": {"@type": "Answer", "text": "No. Results are before commissions, fees and taxes. American-style early assignment is not modeled."}}, {"@type": "Question", "name": "Is my data sent anywhere?", "acceptedAnswer": {"@type": "Answer", "text": "No. Everything runs in your browser. The share link only stores your inputs in the URL."}}]}]}</script>
 </head>
 <body data-strategy="covered_call">
 <header><div class="wrap"><a class="logo" href="/">OptionPayoff<span>Calc</span></a><span style="color:var(--mut);font-size:13px">Free · No sign-up · Runs in your browser</span></div></header>
-
 <main class="wrap">
+<nav class="tools" aria-label="Calculators"><a href="/" class="on">Options Profit Calculator</a><a href="/covered-call-calculator" class="">Covered Call</a><a href="/cash-secured-put-calculator" class="">Cash-Secured Put</a><a href="/wheel-strategy-calculator" class="">Wheel Strategy</a><a href="/iron-condor-calculator" class="">Iron Condor</a></nav>
 <h1>Options Profit Calculator</h1>
 <p class="sub">Payoff chart, breakevens, probability of profit and Greeks for covered calls, cash-secured puts, spreads, iron condors and more.</p>
-
 <div class="grid">
  <section class="card">
   <h2>Setup</h2>
@@ -151,17 +81,14 @@ footer .wrap{padding:18px 16px}
   </div>
  </section>
 </div>
-
-<div class="ad-slot"><!-- ADSENSE: in-article ad unit -->Advertisement</div>
-
+<div class="ad-slot"><!-- ADSENSE -->Advertisement</div>
 <section class="card">
  <h2>P/L by stock price</h2>
  <table class="pl"><thead><tr><th>Stock price</th><th>Change</th><th>P/L at expiry</th><th>P/L on selected date</th></tr></thead><tbody id="plt"></tbody></table>
 </section>
-
-<div class="ad-slot"><!-- ADSENSE: display ad unit -->Advertisement</div>
-
+<div class="ad-slot"><!-- ADSENSE -->Advertisement</div>
 <article>
+
 <h2>How to use this options calculator</h2>
 <ol>
  <li>Pick a strategy. The legs are filled in automatically around the current stock price.</li>
@@ -190,6 +117,7 @@ footer .wrap{padding:18px 16px}
  <li><b>Vega</b>: how much the position changes for each 1 percentage point change in implied volatility.</li>
 </ul>
 
+
 <h2>Frequently asked questions</h2>
 <h3>How is the probability of profit calculated?</h3>
 <p>The stock price at expiration is modeled as lognormal, using the implied volatility you entered. The calculator adds up the probability of every price at which the strategy finishes with a profit. It is an estimate, not a guarantee.</p>
@@ -198,210 +126,13 @@ footer .wrap{padding:18px 16px}
 <h3>Does this include commissions and taxes?</h3>
 <p>No. Results are before commissions, fees and taxes. American-style early assignment is not modeled.</p>
 <h3>Is my data sent anywhere?</h3>
-<p>No. Everything runs in your browser. The "share link" only stores your inputs in the URL.</p>
+<p>No. Everything runs in your browser. The share link only stores your inputs in the URL.</p>
+<p class="related"><b>More calculators:</b> <a href="/covered-call-calculator">Covered Call calculator</a> · <a href="/cash-secured-put-calculator">Cash-Secured Put calculator</a> · <a href="/wheel-strategy-calculator">Wheel Strategy calculator</a> · <a href="/iron-condor-calculator">Iron Condor calculator</a></p>
 <p style="font-size:13px;color:var(--mut)"><i>For educational purposes only. Not financial advice. Options involve risk and are not suitable for all investors.</i></p>
 </article>
 </main>
-
 <footer><div class="wrap">© <span id="yr"></span> OptionPayoffCalc · <a href="/privacy.html">Privacy</a> · Calculations run locally in your browser.</div></footer>
 <div class="toast" id="toast">Link copied</div>
-
-<script>
-(function(){
-"use strict";
-const $=id=>document.getElementById(id);
-const DESC={
- covered_call:"Own 100 shares and sell 1 call against them. You collect premium now; your upside is capped at the strike.",
- csp:"Sell a put and keep cash to buy 100 shares at the strike. You collect premium and get assigned if the stock falls below the strike.",
- long_call:"Buy a call. Risk is limited to the premium paid; upside is unlimited.",
- long_put:"Buy a put. Profits when the stock falls; risk is limited to the premium paid.",
- bull_call:"Buy a call and sell a higher-strike call. A cheaper bullish bet with capped profit.",
- bear_put:"Buy a put and sell a lower-strike put. A cheaper bearish bet with capped profit.",
- iron_condor:"Sell an out-of-the-money put spread and call spread. Profits if the stock stays inside a range.",
- collar:"Own shares, buy a protective put and sell a call to help pay for it. Limits both loss and gain.",
- long_straddle:"Buy a call and a put at the same strike. Profits from a large move in either direction.",
- custom:"Build any combination of stock and option legs (up to 8)."
-};
-let st={strat:document.body.dataset.strategy||"covered_call",S:100,iv:30,days:30,r:4.5,q:0,n:1,at:0,legs:[]};
-
-/* ---------- math ---------- */
-function ncdf(x){const t=1/(1+0.2316419*Math.abs(x)),d=0.3989422804014327*Math.exp(-x*x/2);
- const p=d*t*(0.319381530+t*(-0.356563782+t*(1.781477937+t*(-1.821255978+t*1.330274429))));return x>0?1-p:p;}
-function npdf(x){return 0.3989422804014327*Math.exp(-x*x/2);}
-function bs(type,S,K,T,r,q,v){
- if(T<=0||v<=0||S<=0||K<=0){const c=type==="call";return{price:c?Math.max(S-K,0):Math.max(K-S,0),delta:c?(S>K?1:0):(S<K?-1:0),gamma:0,theta:0,vega:0};}
- const sq=Math.sqrt(T),d1=(Math.log(S/K)+(r-q+v*v/2)*T)/(v*sq),d2=d1-v*sq,eq=Math.exp(-q*T),er=Math.exp(-r*T);
- const g=eq*npdf(d1)/(S*v*sq),vega=S*eq*npdf(d1)*sq/100,dec=-S*eq*npdf(d1)*v/(2*sq);
- if(type==="call")return{price:S*eq*ncdf(d1)-K*er*ncdf(d2),delta:eq*ncdf(d1),gamma:g,theta:(dec-r*K*er*ncdf(d2)+q*S*eq*ncdf(d1))/365,vega};
- return{price:K*er*ncdf(-d2)-S*eq*ncdf(-d1),delta:eq*(ncdf(d1)-1),gamma:g,theta:(dec+r*K*er*ncdf(-d2)-q*S*eq*ncdf(-d1))/365,vega};
-}
-const sgn=l=>l.pos==="long"?1:-1;
-const mult=l=>l.kind==="stock"?l.qty:l.qty*100;
-function plExp(x){let p=0;for(const l of st.legs){
- if(l.kind==="stock")p+=sgn(l)*(x-l.strike)*l.qty;
- else{const iv=l.kind==="call"?Math.max(x-l.strike,0):Math.max(l.strike-x,0);p+=sgn(l)*(iv-l.price)*l.qty*100;}}return p;}
-function plAt(x,daysLeft){const T=Math.max(daysLeft,0)/365,r=st.r/100,q=st.q/100,v=st.iv/100;let p=0;
- for(const l of st.legs){if(l.kind==="stock")p+=sgn(l)*(x-l.strike)*l.qty;
-  else p+=sgn(l)*(bs(l.kind,x,l.strike,T,r,q,v).price-l.price)*l.qty*100;}return p;}
-
-/* ---------- presets ---------- */
-function step(S){return S<10?0.5:S<50?1:S<200?5:10;}
-function rk(x){const s=step(st.S);return Math.max(s,Math.round(x/s)*s);}
-function leg(kind,pos,qty,strike){return{kind,pos,qty,strike:+strike.toFixed(2),price:0,auto:true};}
-function preset(name){const S=st.S,n=st.n;
- const m={covered_call:[leg("stock","long",100*n,S),leg("call","short",n,rk(S*1.05))],
- csp:[leg("put","short",n,rk(S*0.95))],
- long_call:[leg("call","long",n,rk(S))],
- long_put:[leg("put","long",n,rk(S))],
- bull_call:[leg("call","long",n,rk(S)),leg("call","short",n,rk(S*1.05))],
- bear_put:[leg("put","long",n,rk(S)),leg("put","short",n,rk(S*0.95))],
- iron_condor:[leg("put","long",n,rk(S*0.9)),leg("put","short",n,rk(S*0.95)),leg("call","short",n,rk(S*1.05)),leg("call","long",n,rk(S*1.1))],
- collar:[leg("stock","long",100*n,S),leg("put","long",n,rk(S*0.95)),leg("call","short",n,rk(S*1.05))],
- long_straddle:[leg("call","long",n,rk(S)),leg("put","long",n,rk(S))]};
- return m[name]||st.legs;}
-
-/* ---------- legs UI ---------- */
-function renderLegs(){const tb=$("legs");tb.innerHTML="";
- st.legs.forEach((l,i)=>{const tr=document.createElement("tr");
-  tr.innerHTML=`<td><select data-f="kind"><option value="call">Call</option><option value="put">Put</option><option value="stock">Stock</option></select></td>
-  <td><select data-f="pos"><option value="long">Buy</option><option value="short">Sell</option></select></td>
-  <td><input data-f="qty" type="number" min="1" step="1"></td>
-  <td><input data-f="strike" type="number" min="0.01" step="0.5"></td>
-  <td><input data-f="price" type="number" min="0" step="0.01"></td>
-  <td><button class="x" title="Remove leg" aria-label="Remove leg">×</button></td>`;
-  tr.querySelector('[data-f=kind]').value=l.kind;tr.querySelector('[data-f=pos]').value=l.pos;
-  tr.querySelector('[data-f=qty]').value=l.qty;tr.querySelector('[data-f=strike]').value=l.strike;
-  const pr=tr.querySelector('[data-f=price]');pr.value=l.price.toFixed(2);pr.classList.toggle("manual",!l.auto);if(l.kind==="stock"){pr.type="text";pr.disabled=true;pr.value="–";}
-  tr.querySelectorAll("select").forEach(s=>s.addEventListener("change",()=>{l[s.dataset.f]=s.value;if(s.dataset.f==="kind")l.auto=true;toCustom();renderLegs();update();}));
-  tr.querySelectorAll("input").forEach(inp=>inp.addEventListener("input",()=>{const v=parseFloat(inp.value);if(!isFinite(v))return;
-   const f=inp.dataset.f;l[f]=f==="qty"?Math.max(1,Math.round(v)):v;
-   if(f==="price"){l.auto=false;inp.classList.add("manual");}
-   if(f!=="price")toCustomIfStructural(f);update();}));
-  tr.querySelector(".x").addEventListener("click",()=>{st.legs.splice(i,1);toCustom();renderLegs();update();});
-  tb.appendChild(tr);});
- $("addLeg").disabled=st.legs.length>=8;}
-function toCustom(){if(st.strat!=="custom"){st.strat="custom";$("strat").value="custom";$("desc").textContent=DESC.custom;}}
-function toCustomIfStructural(f){if(f==="qty")toCustom();}
-
-/* ---------- main update ---------- */
-function readInputs(){const g=(id,d,min)=>{const v=parseFloat($(id).value);return isFinite(v)?Math.max(v,min):d;};
- st.S=g("S",st.S,0.01);st.iv=g("iv",st.iv,0.1);st.days=Math.round(g("days",st.days,0));st.r=g("r",st.r,-5);st.q=g("q",st.q,0);st.n=Math.round(g("n",st.n,1));}
-function reprice(){const T=st.days/365,r=st.r/100,q=st.q/100,v=st.iv/100;
- st.legs.forEach(l=>{if(!l.auto)return;l.price=l.kind==="stock"?0:Math.max(0.01,+bs(l.kind,st.S,l.strike,T,r,q,v).price.toFixed(2));});
- const rows=$("legs").children;st.legs.forEach((l,i)=>{if(!rows[i])return;const p=rows[i].querySelector('[data-f=price]');if(l.auto&&l.kind!=="stock"&&document.activeElement!==p)p.value=l.price.toFixed(2);});}
-
-function fmt(v,dec){if(!isFinite(v))return v>0?"Unlimited":"Unlimited";const a=Math.abs(v);
- const s=a.toLocaleString("en-US",{minimumFractionDigits:dec??(a>=1000?0:2),maximumFractionDigits:dec??(a>=1000?0:2)});return(v<0?"-$":"$")+s;}
-const pct=v=>(v*100).toFixed(2)+"%";
-
-function analyze(){const ks=[0,st.S];st.legs.forEach(l=>ks.push(l.strike));
- const far=Math.max(...ks)*10+100;ks.push(far);const pts=[...new Set(ks)].sort((a,b)=>a-b),vals=pts.map(plExp);
- const slope=plExp(far*2)-plExp(far);
- const maxP=slope>1e-9?Infinity:Math.max(...vals),maxL=slope<-1e-9?-Infinity:Math.min(...vals);
- const be=[];for(let i=0;i<pts.length-1;i++){const a=vals[i],b=vals[i+1];
-  if(Math.abs(a)<1e-9&&i>0)be.push(pts[i]);else if(a*b<0)be.push(pts[i]+(pts[i+1]-pts[i])*(-a)/(b-a));}
- return{maxP,maxL,be:[...new Set(be.map(x=>+x.toFixed(2)))]};}
-
-function probProfit(){const T=st.days/365;if(T<=0)return plExp(st.S)>0?1:0;
- const v=st.iv/100,m=Math.log(st.S)+(st.r/100-st.q/100-v*v/2)*T,sd=v*Math.sqrt(T),lo=Math.exp(m-6*sd),hi=Math.exp(m+6*sd),N=2000,ratio=hi/lo;
- let p=0,prev=ncdf(-6);for(let i=1;i<=N;i++){const a=lo*Math.pow(ratio,(i-1)/N),b=lo*Math.pow(ratio,i/N),c=ncdf((Math.log(b)-m)/sd);
-  if(plExp(Math.sqrt(a*b))>0)p+=c-prev;prev=c;}return Math.min(1,Math.max(0,p));}
-
-function greeks(){const T=st.days/365,r=st.r/100,q=st.q/100,v=st.iv/100;let D=0,G=0,Th=0,V=0;
- st.legs.forEach(l=>{if(l.kind==="stock"){D+=sgn(l)*l.qty;return;}const g=bs(l.kind,st.S,l.strike,T,r,q,v),k=sgn(l)*l.qty*100;
-  D+=k*g.delta;G+=k*g.gamma;Th+=k*g.theta;V+=k*g.vega;});return{D,G,Th,V};}
-
-function update(){readInputs();reprice();
- const at=$("at");at.max=st.days;if(st.at>st.days)st.at=st.days;at.value=st.at;
- $("atLbl").textContent=st.at===0?"Today":(st.at>=st.days?"Expiration":"In "+st.at+" day"+(st.at>1?"s":""));
- let net=0;st.legs.forEach(l=>{if(l.kind!=="stock")net+=-sgn(l)*l.price*l.qty*100;});
- $("netK").textContent=net>=0?"Net credit":"Net debit";$("net").textContent=fmt(Math.abs(net));$("net").className="v "+(net>=0?"pos":"neg");
- const a=analyze();$("maxP").textContent=a.maxP<=0?fmt(a.maxP):fmt(a.maxP);$("maxL").textContent=a.maxL>=0?fmt(a.maxL):fmt(a.maxL);
- $("be").textContent=a.be.length?a.be.map(x=>"$"+x.toFixed(2)).join("  ·  "):"None";
- const p=probProfit();$("pop").textContent=st.legs.length?(p*100).toFixed(1)+"%":"–";
- extras(a,net);
- const g=greeks();$("gD").textContent=g.D.toFixed(1);$("gG").textContent=g.G.toFixed(2);
- $("gT").textContent=fmt(g.Th);$("gT").className="v "+(g.Th>=0?"pos":"neg");$("gV").textContent=fmt(g.V);
- draw();table();saveHash();}
-
-function extras(a,net){const ann=x=>st.days>0?" ("+pct(x*365/st.days)+" /yr)":"";let k="Return on risk",v="–";
- const stock=st.legs.find(l=>l.kind==="stock"&&l.pos==="long"),call=st.legs.find(l=>l.kind==="call"&&l.pos==="short"),put=st.legs.find(l=>l.kind==="put"&&l.pos==="short");
- if(st.strat==="covered_call"&&stock&&call){const S0=stock.strike,prem=call.price,called=(prem+call.strike-S0)/S0,flat=prem/S0;
-  k="If called · If unchanged · Downside cushion";v=pct(called)+ann(called)+"  ·  "+pct(flat)+"  ·  "+pct(prem/S0);}
- else if(st.strat==="csp"&&put){const ret=put.price/(put.strike-put.price);k="Return on cash · Effective buy price";
-  v=pct(ret)+ann(ret)+"  ·  $"+(put.strike-put.price).toFixed(2);}
- else if(isFinite(a.maxP)&&isFinite(a.maxL)&&a.maxL<0){const rr=a.maxP/-a.maxL;v=pct(rr);}
- $("extraK").textContent=k;$("extra").textContent=v;}
-
-/* ---------- chart ---------- */
-let CH=null;
-function range(){const v=st.iv/100,T=Math.max(st.days,1)/365,mv=Math.exp(2.6*v*Math.sqrt(T));
- const ks=st.legs.filter(l=>l.kind!=="stock").map(l=>l.strike);
- let lo=Math.min(st.S/mv,...ks.map(k=>k*0.92)),hi=Math.max(st.S*mv,...ks.map(k=>k*1.08));
- lo=Math.max(lo,0.01);if(hi-lo<st.S*0.1){lo=st.S*0.9;hi=st.S*1.1;}return[lo,hi];}
-function ticks(a,b,n){const raw=(b-a)/n,mag=Math.pow(10,Math.floor(Math.log10(raw))),f=raw/mag,s=(f<1.5?1:f<3.5?2:f<7.5?5:10)*mag,t=[];
- for(let x=Math.ceil(a/s)*s;x<=b+1e-9;x+=s)t.push(+x.toFixed(10));return t;}
-function draw(hx){const c=$("chart"),dpr=window.devicePixelRatio||1,w=c.clientWidth,h=c.clientHeight;if(!w)return;
- c.width=w*dpr;c.height=h*dpr;const ctx=c.getContext("2d");ctx.setTransform(dpr,0,0,dpr,0,0);ctx.clearRect(0,0,w,h);
- const P={l:68,r:14,t:12,b:30},[lo,hi]=range(),N=320,xs=[],e=[],t=[],left=st.days-st.at;
- for(let i=0;i<N;i++){const x=lo+(hi-lo)*i/(N-1);xs.push(x);e.push(plExp(x));t.push(plAt(x,left));}
- let y0=Math.min(0,...e,...t),y1=Math.max(0,...e,...t);const sp=(y1-y0)||1;y0-=sp*.08;y1+=sp*.08;
- const X=x=>P.l+(x-lo)/(hi-lo)*(w-P.l-P.r),Y=y=>P.t+(y1-y)/(y1-y0)*(h-P.t-P.b);
- ctx.font="11px system-ui,sans-serif";ctx.fillStyle="#5b6876";ctx.strokeStyle="#eef1f4";ctx.lineWidth=1;
- ticks(y0,y1,6).forEach(v=>{const y=Math.round(Y(v))+.5;ctx.beginPath();ctx.moveTo(P.l,y);ctx.lineTo(w-P.r,y);ctx.stroke();ctx.textAlign="right";ctx.fillText(fmt(v,0),P.l-6,y+4);});
- ticks(lo,hi,Math.max(3,Math.floor(w/90))).forEach(v=>{const x=Math.round(X(v))+.5;ctx.beginPath();ctx.moveTo(x,P.t);ctx.lineTo(x,h-P.b);ctx.stroke();ctx.textAlign="center";ctx.fillText("$"+v,x,h-P.b+16);});
- const zy=Y(0);
- // fill
- const poly=()=>{ctx.beginPath();ctx.moveTo(X(xs[0]),zy);xs.forEach((x,i)=>ctx.lineTo(X(x),Y(e[i])));ctx.lineTo(X(xs[N-1]),zy);ctx.closePath();};
- ctx.save();ctx.beginPath();ctx.rect(P.l,P.t,w-P.l-P.r,zy-P.t);ctx.clip();poly();ctx.fillStyle="rgba(15,157,88,.13)";ctx.fill();ctx.restore();
- ctx.save();ctx.beginPath();ctx.rect(P.l,zy,w-P.l-P.r,h-P.b-zy);ctx.clip();poly();ctx.fillStyle="rgba(217,48,37,.12)";ctx.fill();ctx.restore();
- ctx.strokeStyle="#9aa5b1";ctx.beginPath();ctx.moveTo(P.l,zy);ctx.lineTo(w-P.r,zy);ctx.stroke();
- // current price
- const sx=X(st.S);ctx.setLineDash([3,3]);ctx.strokeStyle="#9aa5b1";ctx.beginPath();ctx.moveTo(sx,P.t);ctx.lineTo(sx,h-P.b);ctx.stroke();ctx.setLineDash([]);
- ctx.fillStyle="#5b6876";ctx.textAlign="left";ctx.fillText("Now $"+st.S,Math.min(sx+4,w-70),P.t+11);
- // lines
- const line=(arr,col,dash)=>{ctx.setLineDash(dash);ctx.strokeStyle=col;ctx.lineWidth=2.2;ctx.beginPath();xs.forEach((x,i)=>i?ctx.lineTo(X(x),Y(arr[i])):ctx.moveTo(X(x),Y(arr[i])));ctx.stroke();ctx.setLineDash([]);ctx.lineWidth=1;};
- if(left>0)line(t,"#8a6df1",[6,4]);line(e,"#2563eb",[]);
- analyze().be.forEach(b=>{if(b<lo||b>hi)return;ctx.fillStyle="#fff";ctx.strokeStyle="#16202c";ctx.beginPath();ctx.arc(X(b),zy,4,0,7);ctx.fill();ctx.stroke();});
- CH={X,Y,lo,hi,P,w,h};
- if(hx!=null){const px=Math.min(Math.max(hx,P.l),w-P.r),x=lo+(px-P.l)/(w-P.l-P.r)*(hi-lo);
-  ctx.strokeStyle="#16202c55";ctx.beginPath();ctx.moveTo(px,P.t);ctx.lineTo(px,h-P.b);ctx.stroke();
-  const pe=plExp(x),pt=plAt(x,left);ctx.fillStyle="#2563eb";ctx.beginPath();ctx.arc(px,Y(pe),4,0,7);ctx.fill();
-  const tip=$("tip");tip.style.display="block";
-  tip.innerHTML="Stock $"+x.toFixed(2)+" ("+((x/st.S-1)*100).toFixed(1)+"%)<br>Expiry: <b>"+fmt(pe)+"</b>"+(left>0?"<br>"+$("atLbl").textContent+": <b>"+fmt(pt)+"</b>":"");
-  tip.style.left=Math.min(px+12,w-tip.offsetWidth-4)+"px";tip.style.top=Math.max(4,Y(pe)-50)+"px";}
- else $("tip").style.display="none";}
-
-function table(){const left=st.days-st.at,moves=[-.2,-.15,-.1,-.05,0,.05,.1,.15,.2];
- $("plt").innerHTML=moves.map(m=>{const x=st.S*(1+m),pe=plExp(x),pt=plAt(x,left);
-  return`<tr class="${m===0?"cur":""}"><td>$${x.toFixed(2)}</td><td>${m>0?"+":""}${(m*100).toFixed(0)}%</td><td class="${pe>=0?"pos":"neg"}">${fmt(pe)}</td><td class="${pt>=0?"pos":"neg"}">${fmt(pt)}</td></tr>`;}).join("");}
-
-/* ---------- state in URL ---------- */
-function saveHash(){try{const s={...st,legs:st.legs.map(l=>[l.kind[0],l.pos[0],l.qty,l.strike,l.auto?null:l.price])};
- history.replaceState(null,"","#"+encodeURIComponent(JSON.stringify(s)));}catch(e){}}
-function loadHash(){try{if(location.hash.length<3)return false;const s=JSON.parse(decodeURIComponent(location.hash.slice(1)));
- const K={c:"call",p:"put",s:"stock"},Pp={l:"long",s:"short"};
- Object.assign(st,s,{legs:(s.legs||[]).slice(0,8).map(a=>({kind:K[a[0]]||"call",pos:Pp[a[1]]||"long",qty:+a[2]||1,strike:+a[3]||st.S,price:a[4]==null?0:+a[4],auto:a[4]==null}))});return true;}catch(e){return false;}}
-
-/* ---------- wiring ---------- */
-function setInputs(){["S","iv","days","r","q","n"].forEach(id=>$(id).value=st[id]);$("strat").value=st.strat;$("desc").textContent=DESC[st.strat]||"";}
-$("strat").addEventListener("change",e=>{st.strat=e.target.value;$("desc").textContent=DESC[st.strat];readInputs();if(st.strat!=="custom")st.legs=preset(st.strat);renderLegs();update();});
-["S","n"].forEach(id=>$(id).addEventListener("change",()=>{readInputs();if(st.strat!=="custom"){st.legs=preset(st.strat);renderLegs();}update();}));
-["S","iv","days","r","q"].forEach(id=>$(id).addEventListener("input",update));
-$("at").addEventListener("input",e=>{st.at=+e.target.value;update();});
-$("addLeg").addEventListener("click",()=>{if(st.legs.length>=8)return;st.legs.push(leg("call","long",st.n,rk(st.S)));toCustom();renderLegs();update();});
-$("resetP").addEventListener("click",()=>{st.legs.forEach(l=>{l.auto=true;if(l.kind==="stock")l.strike=st.S;});renderLegs();update();});
-$("share").addEventListener("click",()=>{const u=location.href;(navigator.clipboard?navigator.clipboard.writeText(u):Promise.reject()).catch(()=>{}).finally(()=>{const t=$("toast");t.style.display="block";setTimeout(()=>t.style.display="none",1600);});});
-const cv=$("chart");
-cv.addEventListener("mousemove",e=>{const r=cv.getBoundingClientRect();draw(e.clientX-r.left);});
-cv.addEventListener("mouseleave",()=>draw());
-cv.addEventListener("touchmove",e=>{const r=cv.getBoundingClientRect();draw(e.touches[0].clientX-r.left);},{passive:true});
-window.addEventListener("resize",()=>draw());
-$("yr").textContent=new Date().getFullYear();
-
-if(!loadHash())st.legs=preset(st.strat);
-setInputs();renderLegs();update();
-})();
-</script>
+<script src="/calc.js"></script>
 </body>
 </html>

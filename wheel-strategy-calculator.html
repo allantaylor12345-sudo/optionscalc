@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Wheel Strategy Calculator – Cash-Secured Put + Covered Call Returns (Free)</title>
+<meta name="description" content="Free wheel strategy calculator. Model the full cycle: sell a cash-secured put, get assigned, sell a covered call. See cost basis, profit and annualized return for each scenario.">
+<link rel="canonical" href="https://optionpayoffcalc.com/wheel-strategy-calculator">
+<meta property="og:title" content="Wheel Strategy Calculator – Cash-Secured Put + Covered Call Returns (Free)">
+<meta property="og:description" content="Free wheel strategy calculator. Model the full cycle: sell a cash-secured put, get assigned, sell a covered call. See cost basis, profit and annualized return for each scenario.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://optionpayoffcalc.com/wheel-strategy-calculator">
+<link rel="stylesheet" href="/style.css">
+<!-- ADSENSE: paste the AdSense <script> tag here after approval -->
+<script type="application/ld+json">{"@context": "https://schema.org", "@graph": [{"@type": "WebApplication", "name": "Wheel Strategy Calculator", "url": "https://optionpayoffcalc.com/wheel-strategy-calculator", "applicationCategory": "FinanceApplication", "operatingSystem": "Any", "offers": {"@type": "Offer", "price": "0", "priceCurrency": "USD"}}, {"@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "Is the wheel strategy profitable?", "acceptedAnswer": {"@type": "Answer", "text": "It earns premium in flat or rising markets. In a sharp decline it loses money like owning the stock, reduced by the premiums collected."}}, {"@type": "Question", "name": "Which stocks are best for the wheel?", "acceptedAnswer": {"@type": "Answer", "text": "Liquid stocks or ETFs you would be comfortable holding long term, with active option markets and tight bid/ask spreads."}}, {"@type": "Question", "name": "Should I sell the covered call below my cost basis?", "acceptedAnswer": {"@type": "Answer", "text": "Usually not, because assignment would lock in a loss. Many wheel traders only sell calls at or above their cost basis."}}, {"@type": "Question", "name": "How often can I run the wheel?", "acceptedAnswer": {"@type": "Answer", "text": "As often as each leg expires. Weekly and monthly expirations are both common; compare them using the annualized return."}}]}]}</script>
+</head>
+<body data-strategy="csp">
+<header><div class="wrap"><a class="logo" href="/">OptionPayoff<span>Calc</span></a><span style="color:var(--mut);font-size:13px">Free · No sign-up · Runs in your browser</span></div></header>
+<main class="wrap">
+<nav class="tools" aria-label="Calculators"><a href="/" class="">Options Profit Calculator</a><a href="/covered-call-calculator" class="">Covered Call</a><a href="/cash-secured-put-calculator" class="">Cash-Secured Put</a><a href="/wheel-strategy-calculator" class="on">Wheel Strategy</a><a href="/iron-condor-calculator" class="">Iron Condor</a></nav>
+<h1>Wheel Strategy Calculator</h1>
+<p class="sub">Model the full wheel: cash-secured put, assignment and covered call. See your cost basis and annualized return in each scenario.</p>
+
+<section class="card" style="margin-bottom:16px">
+ <h2>Wheel cycle calculator</h2>
+ <div class="row row3">
+  <div><label for="wS">Stock price ($)</label><input id="wS" type="number" step="0.01" value="50"></div>
+  <div><label for="wKp">Put strike ($)</label><input id="wKp" type="number" step="0.5" value="48"></div>
+  <div><label for="wPp">Put premium ($/share)</label><input id="wPp" type="number" step="0.01" value="0.90"></div>
+ </div>
+ <div class="row row3">
+  <div><label for="wKc">Call strike ($)</label><input id="wKc" type="number" step="0.5" value="50"></div>
+  <div><label for="wPc">Call premium ($/share)</label><input id="wPc" type="number" step="0.01" value="0.80"></div>
+  <div><label for="wD">Days per leg</label><input id="wD" type="number" step="1" value="30"></div>
+ </div>
+ <div class="row"><div><label for="wN">Contracts</label><input id="wN" type="number" step="1" min="1" value="1"></div><div></div></div>
+ <div class="stats">
+  <div class="stat"><div class="k">Cash required</div><div class="v" id="wCap">–</div></div>
+  <div class="stat"><div class="k">Cost basis if assigned</div><div class="v" id="wBasis">–</div></div>
+  <div class="stat"><div class="k">Basis after call premium</div><div class="v" id="wBasis2">–</div></div>
+  <div class="stat"><div class="k">Put breakeven</div><div class="v" id="wBE">–</div></div>
+ </div>
+ <p id="wWarn" style="display:none;background:#fff4e5;border:1px solid #f0b429;border-radius:8px;padding:8px 10px;font-size:13px">Your call strike is below your cost basis. If the shares are called away, the full cycle loses money.</p>
+ <table class="pl"><thead><tr><th>Scenario</th><th>Profit</th><th>Return</th><th>Annualized</th><th>Time</th></tr></thead><tbody id="wRows"></tbody></table>
+</section>
+<div class="grid">
+ <section class="card">
+  <h2>Setup</h2>
+  <label for="strat">Strategy</label>
+  <select id="strat">
+   <option value="covered_call">Covered Call</option>
+   <option value="csp">Cash-Secured Put</option>
+   <option value="long_call">Long Call</option>
+   <option value="long_put">Long Put</option>
+   <option value="bull_call">Bull Call Spread</option>
+   <option value="bear_put">Bear Put Spread</option>
+   <option value="iron_condor">Iron Condor</option>
+   <option value="collar">Collar</option>
+   <option value="long_straddle">Long Straddle</option>
+   <option value="custom">Custom (build your own)</option>
+  </select>
+  <p class="desc" id="desc"></p>
+  <div class="row">
+   <div><label for="S">Stock price ($)</label><input id="S" type="number" step="0.01" min="0.01" value="100"></div>
+   <div><label for="iv">Implied volatility (%)</label><input id="iv" type="number" step="0.5" min="1" value="30"></div>
+  </div>
+  <div class="row row3">
+   <div><label for="days">Days to expiry</label><input id="days" type="number" step="1" min="0" value="30"></div>
+   <div><label for="r">Interest rate (%)</label><input id="r" type="number" step="0.1" value="4.5"></div>
+   <div><label for="q">Dividend yield (%)</label><input id="q" type="number" step="0.1" min="0" value="0"></div>
+  </div>
+  <div class="row">
+   <div><label for="n">Contracts</label><input id="n" type="number" step="1" min="1" value="1"></div>
+   <div></div>
+  </div>
+  <h2 style="margin-top:6px">Legs</h2>
+  <table class="legs"><thead><tr><th>Type</th><th>Side</th><th>Qty</th><th>Strike</th><th>Price</th><th></th></tr></thead><tbody id="legs"></tbody></table>
+  <p style="font-size:12px;color:var(--mut);margin:6px 0 0">Option prices are filled with theoretical Black-Scholes values. Type your broker's real price to override (yellow = manual). For stock, "Strike" is your purchase price.</p>
+  <div class="btns">
+   <button class="b" id="addLeg">+ Add leg</button>
+   <button class="b" id="resetP">Reset to theoretical prices</button>
+   <button class="b pri" id="share">Copy share link</button>
+  </div>
+ </section>
+
+ <section class="card">
+  <h2>Results</h2>
+  <div class="stats">
+   <div class="stat"><div class="k" id="netK">Net credit</div><div class="v" id="net">–</div></div>
+   <div class="stat"><div class="k">Max profit</div><div class="v pos" id="maxP">–</div></div>
+   <div class="stat"><div class="k">Max loss</div><div class="v neg" id="maxL">–</div></div>
+   <div class="stat"><div class="k">Probability of profit</div><div class="v" id="pop">–</div></div>
+   <div class="stat" style="grid-column:span 2"><div class="k">Breakeven(s) at expiry</div><div class="v" id="be">–</div></div>
+   <div class="stat" style="grid-column:span 2" id="extraBox"><div class="k" id="extraK">Return on risk</div><div class="v" id="extra">–</div></div>
+  </div>
+  <div class="legend"><span><i></i>P/L at expiration</span><span><i class="d"></i>P/L on selected date</span></div>
+  <div class="slider"><span id="atLbl">Today</span><input id="at" type="range" min="0" max="30" value="0" aria-label="Days from now"></div>
+  <div id="chartBox"><canvas id="chart"></canvas><div id="tip"></div></div>
+  <div class="greeks">
+   <div class="stat"><div class="k">Delta (shares)</div><div class="v" id="gD">–</div></div>
+   <div class="stat"><div class="k">Gamma</div><div class="v" id="gG">–</div></div>
+   <div class="stat"><div class="k">Theta ($/day)</div><div class="v" id="gT">–</div></div>
+   <div class="stat"><div class="k">Vega ($/1% IV)</div><div class="v" id="gV">–</div></div>
+  </div>
+ </section>
+</div>
+<div class="ad-slot"><!-- ADSENSE -->Advertisement</div>
+<section class="card">
+ <h2>P/L by stock price</h2>
+ <table class="pl"><thead><tr><th>Stock price</th><th>Change</th><th>P/L at expiry</th><th>P/L on selected date</th></tr></thead><tbody id="plt"></tbody></table>
+</section>
+<div class="ad-slot"><!-- ADSENSE -->Advertisement</div>
+<article>
+
+<h2>How the wheel strategy works</h2>
+<ol>
+ <li><b>Sell a cash-secured put</b> on a stock you would like to own. Collect the premium.</li>
+ <li>If the put expires worthless, keep the premium and sell another put.</li>
+ <li>If you are <b>assigned</b>, you now own 100 shares at the strike price, with a cost basis reduced by the put premium.</li>
+ <li><b>Sell a covered call</b> on those shares, ideally at a strike above your cost basis.</li>
+ <li>If the shares are called away, the cycle is complete and you start again with a new put.</li>
+</ol>
+<h2>Reading the wheel calculator</h2>
+<ul>
+ <li><b>Cost basis if assigned</b> = put strike − put premium.</li>
+ <li><b>Basis after call premium</b> subtracts the covered call premium as well, which is your real breakeven while you hold the shares.</li>
+ <li><b>Full cycle profit</b> = put premium + call premium + (call strike − put strike), per share.</li>
+</ul>
+<p>The calculator warns you when the call strike is below your cost basis, because being called away there locks in a loss.</p>
+<h2>Visualize each leg</h2>
+<p>Use the options calculator above the article to see the payoff chart of the put leg, then switch the strategy to Covered Call to model the second leg. You can also use the dedicated <a href="/cash-secured-put-calculator">cash-secured put calculator</a> and <a href="/covered-call-calculator">covered call calculator</a>.</p>
+<h2>Risks of the wheel</h2>
+<p>The wheel works best on stable stocks you are happy to own. Its main risk is a large drop after assignment: you hold shares worth less than your cost basis, and selling calls above that basis may pay very little premium.</p>
+
+<h2>Frequently asked questions</h2>
+<h3>Is the wheel strategy profitable?</h3>
+<p>It earns premium in flat or rising markets. In a sharp decline it loses money like owning the stock, reduced by the premiums collected.</p>
+<h3>Which stocks are best for the wheel?</h3>
+<p>Liquid stocks or ETFs you would be comfortable holding long term, with active option markets and tight bid/ask spreads.</p>
+<h3>Should I sell the covered call below my cost basis?</h3>
+<p>Usually not, because assignment would lock in a loss. Many wheel traders only sell calls at or above their cost basis.</p>
+<h3>How often can I run the wheel?</h3>
+<p>As often as each leg expires. Weekly and monthly expirations are both common; compare them using the annualized return.</p>
+<p class="related"><b>More calculators:</b> <a href="/">Options Profit Calculator</a> · <a href="/covered-call-calculator">Covered Call calculator</a> · <a href="/cash-secured-put-calculator">Cash-Secured Put calculator</a> · <a href="/iron-condor-calculator">Iron Condor calculator</a></p>
+<p style="font-size:13px;color:var(--mut)"><i>For educational purposes only. Not financial advice. Options involve risk and are not suitable for all investors.</i></p>
+</article>
+</main>
+<footer><div class="wrap">© <span id="yr"></span> OptionPayoffCalc · <a href="/privacy.html">Privacy</a> · Calculations run locally in your browser.</div></footer>
+<div class="toast" id="toast">Link copied</div>
+<script src="/calc.js"></script>
+</body>
+</html>
