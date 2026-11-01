@@ -114,7 +114,7 @@ function update(){readInputs();reprice();
  extras(a,net);
  const g=greeks();$("gD").textContent=g.D.toFixed(1);$("gG").textContent=g.G.toFixed(2);
  $("gT").textContent=fmt(g.Th);$("gT").className="v "+(g.Th>=0?"pos":"neg");$("gV").textContent=fmt(g.V);
- draw();table();saveHash();}
+ draw();table();ruler();saveHash();}
 
 function extras(a,net){const ann=x=>st.days>0?" ("+pct(x*365/st.days)+" /yr)":"";let k="Return on risk",v="–";
  const stock=st.legs.find(l=>l.kind==="stock"&&l.pos==="long"),call=st.legs.find(l=>l.kind==="call"&&l.pos==="short"),put=st.legs.find(l=>l.kind==="put"&&l.pos==="short");
@@ -124,6 +124,34 @@ function extras(a,net){const ann=x=>st.days>0?" ("+pct(x*365/st.days)+" /yr)":""
   v=pct(ret)+ann(ret)+"  ·  $"+(put.strike-put.price).toFixed(2);}
  else if(isFinite(a.maxP)&&isFinite(a.maxL)&&a.maxL<0){const rr=a.maxP/-a.maxL;v=pct(rr);}
  $("extraK").textContent=k;$("extra").textContent=v;}
+
+
+/* ---------- strike ruler (covered call / CSP) ---------- */
+function ruler(){
+ let box=$("ruler");
+ if(!box){box=document.createElement("div");box.id="ruler";box.style.margin="0 0 12px";$("maxP").closest(".stats").after(box);}
+ const call=st.legs.find(l=>l.kind==="call"&&l.pos==="short"),put=st.legs.find(l=>l.kind==="put"&&l.pos==="short");
+ let leg=null,type=null;
+ if(st.strat==="covered_call"&&call){leg=call;type="call";}else if(st.strat==="csp"&&put){leg=put;type="put";}
+ if(!leg||!(leg.strike>0)){box.style.display="none";return;}
+ box.style.display="block";
+ const k=leg.strike,sp=st.S,W=420,d=(sp/k-1)*100,R=Math.max(4,Math.ceil(Math.abs(d)/2)*2+2);
+ const x=p=>14+(p/k-1+R/100)/(2*R/100)*(W-28),xs=x(k),xp=Math.min(Math.max(x(sp),14),W-14);
+ const itm=type==="call"?sp>k:sp<k,cor=itm?"#d93025":"#0f9d58",anc=xp<70?"start":(xp>W-70?"end":"middle");
+ const G="rgba(15,157,88,.16)",Rd="rgba(217,48,37,.14)",left=type==="call"?G:Rd,right=type==="call"?Rd:G;
+ let t="";for(const f of[-R,-R/2,R/2,R]){const xx=x(k*(1+f/100));t+=`<line x1="${xx.toFixed(1)}" y1="40" x2="${xx.toFixed(1)}" y2="43" stroke="#9aa5b1"/><text x="${xx.toFixed(1)}" y="53" text-anchor="middle" font-size="9" fill="#5b6876">$${(k*(1+f/100)).toFixed(2)}</text>`;}
+ const msg=type==="call"?(itm?`Stock is <b>${d.toFixed(1)}% above</b> the strike: likely to be called away at expiration.`:`Stock can rise <b>${(-d).toFixed(1)}%</b> before reaching the strike.`)
+  :(itm?`Stock is <b>${(-d).toFixed(1)}% below</b> the strike: likely to be assigned at expiration.`:`Stock can fall <b>${d.toFixed(1)}%</b> before reaching the strike.`);
+ const zl=type==="call"?"keep shares":"assigned",zr=type==="call"?"called away":"keep premium";
+ box.innerHTML=`<div style="font-size:12px;color:var(--mut);margin-bottom:2px">Stock price vs strike</div>
+<svg viewBox="-18 0 ${W+36} 66" style="width:100%;height:auto;display:block" role="img" aria-label="Stock ${sp} versus strike ${k}">
+<rect x="14" y="28" width="${(xs-14).toFixed(1)}" height="12" fill="${left}"/><rect x="${xs.toFixed(1)}" y="28" width="${(W-14-xs).toFixed(1)}" height="12" fill="${right}"/>
+<text x="18" y="37" font-size="8.5" fill="#5b6876">${zl}</text><text x="${W-18}" y="37" font-size="8.5" fill="#5b6876" text-anchor="end">${zr}</text>${t}
+<line x1="${xs.toFixed(1)}" y1="22" x2="${xs.toFixed(1)}" y2="44" stroke="#16202c" stroke-width="2"/><text x="${xs.toFixed(1)}" y="64" text-anchor="middle" font-size="10" font-weight="600" fill="#16202c">strike $${k.toFixed(2)}</text>
+<line x1="${xp.toFixed(1)}" y1="13" x2="${xp.toFixed(1)}" y2="40" stroke="${cor}" stroke-width="1.3" stroke-dasharray="2 2"/><circle cx="${xp.toFixed(1)}" cy="34" r="5" fill="${cor}" stroke="#fff" stroke-width="2"/>
+<text x="${xp.toFixed(1)}" y="9" text-anchor="${anc}" font-size="10.5" font-weight="700" fill="${cor}">stock $${sp.toFixed(2)}</text></svg>
+<div style="font-size:13px;color:${cor}">${msg}</div>`;
+}
 
 /* ---------- chart ---------- */
 let CH=null;
@@ -218,6 +246,46 @@ function calc(){
  $("wCap").textContent=usd(cap);$("wBasis").textContent="$"+basis.toFixed(2);$("wBasis2").textContent="$"+basis2.toFixed(2);
  $("wBE").textContent="$"+basis.toFixed(2);
  $("wWarn").style.display=v.wKc<basis?"block":"none";
+}
+ids.forEach(i=>$(i).addEventListener("input",calc));calc();
+})();
+
+
+/* ---------- Roll calculator ---------- */
+(function(){
+"use strict";
+const $=id=>document.getElementById(id);
+if(!$("rS"))return;
+const ids=["rS","rK1","rP0","rP1","rD1","rK2","rP2","rD2","rN"];
+const pct=v=>(v*100).toFixed(2)+"%";
+const usd=v=>(v<0?"-$":"$")+Math.abs(v).toLocaleString("en-US",{minimumFractionDigits:2,maximumFractionDigits:2});
+const cls=v=>v>=0?"pos":"neg";
+function calc(){
+ const v={};ids.forEach(i=>v[i]=parseFloat($(i).value));
+ if(ids.some(i=>!isFinite(v[i]))||v.rS<=0||v.rP0<=0)return;
+ const n=Math.max(1,Math.round(v.rN)),m=100*n,S=v.rS,d1=Math.max(1,v.rD1),d2=Math.max(1,v.rD2);
+ const captured=(v.rP0-v.rP1)/v.rP0,intr=Math.max(0,S-v.rK1),extr=Math.max(0,v.rP1-intr);
+ const net=v.rP2-v.rP1,dK=v.rK2-v.rK1;
+ const retWorthless=net/S,retCalled=(net+Math.max(0,v.rK2-S))/S;
+ const perDayOld=extr/d1,perDayNew=Math.max(0,v.rP2-Math.max(0,S-v.rK2))/d2;
+ $("rCap").textContent=pct(captured);$("rCap").className="v "+cls(captured);
+ $("rLock").textContent=usd((v.rP0-v.rP1)*m);$("rLock").className="v "+cls(v.rP0-v.rP1);
+ $("rNet").textContent=(net>=0?"Credit ":"Debit ")+usd(Math.abs(net)*m);$("rNet").className="v "+cls(net);
+ $("rDK").textContent=(dK>=0?"+":"-")+"$"+Math.abs(dK).toFixed(2)+" ("+(dK>=0?"+":"-")+usd(Math.abs(dK)*m)+" upside)";
+ $("rLeft").textContent=usd(extr*m)+" time value";
+ $("rRows").innerHTML=[
+  ["Close now","Buy back the call; the shares keep any gain",usd((v.rP0-v.rP1)*m)+" on the call","–"],
+  ["Hold to expiration",intr>0?"Shares called away at $"+v.rK1.toFixed(2)+"; you earn the remaining time value":"If the stock stays below $"+v.rK1.toFixed(2)+", the call expires and you keep the rest",usd(extr*m)+" more",pct(extr/S*365/d1)+" /yr"],
+  ["Roll: new call expires worthless","Net "+(net>=0?"credit":"debit")+" kept",usd(net*m),pct(retWorthless*365/d2)+" /yr"],
+  ["Roll: called away at new strike","Net "+(net>=0?"credit":"debit")+" + stock gain up to $"+v.rK2.toFixed(2),usd((net+Math.max(0,v.rK2-S))*m),pct(retCalled*365/d2)+" /yr"]
+ ].map(r=>`<tr><td><b>${r[0]}</b><br><span style="color:var(--mut);font-size:12px">${r[1]}</span></td><td>${r[2]}</td><td>${r[3]}</td></tr>`).join("");
+ const tips=[];
+ if(captured>=0.5)tips.push(`You've captured <b>${pct(captured)}</b> of the original premium. Many traders close or roll once 50–80% is captured, because the remaining premium is small compared with the risk left.`);
+ if(captured<0)tips.push(`The call now costs more than you sold it for. Rolling will not erase that loss; it only moves the position to a new strike or date.`);
+ if(net<0)tips.push(`This roll is a <b>debit</b>: you pay to roll. That is usually only worth it if the higher strike adds more upside than the cost.`);
+ tips.push(`Time value per day: current call <b>${usd(perDayOld*m)}</b>/day vs new call <b>${usd(perDayNew*m)}</b>/day.`+(Math.abs(perDayNew-perDayOld)*m<0.5?" About the same.":perDayNew>perDayOld?" The new call earns more per day.":" The current call still earns more per day."));
+ if(intr>0)tips.push(`The current call is <b>in the money</b> by $${intr.toFixed(2)}. If it is American-style, early assignment becomes more likely as time value shrinks.`);
+ $("rTips").innerHTML=tips.map(t=>`<li>${t}</li>`).join("");
 }
 ids.forEach(i=>$(i).addEventListener("input",calc));calc();
 })();

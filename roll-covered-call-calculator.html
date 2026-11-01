@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Roll Covered Call Calculator – Should You Close, Hold or Roll? (Free)</title>
+<meta name="description" content="Free covered call roll calculator: profit captured, net credit or debit, strike change, annualized return of the new call, and a close vs hold vs roll comparison.">
+<link rel="canonical" href="https://optionpayoffcalc.com/roll-covered-call-calculator">
+<meta property="og:title" content="Roll Covered Call Calculator – Should You Close, Hold or Roll? (Free)">
+<meta property="og:description" content="Free covered call roll calculator: profit captured, net credit or debit, strike change, annualized return of the new call, and a close vs hold vs roll comparison.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://optionpayoffcalc.com/roll-covered-call-calculator">
+<link rel="stylesheet" href="/style.css">
+<!-- ADSENSE: paste the AdSense <script> tag here after approval -->
+<script type="application/ld+json">{"@context": "https://schema.org", "@graph": [{"@type": "WebApplication", "name": "Roll Covered Call Calculator", "url": "https://optionpayoffcalc.com/roll-covered-call-calculator", "applicationCategory": "FinanceApplication", "operatingSystem": "Any", "offers": {"@type": "Offer", "price": "0", "priceCurrency": "USD"}}, {"@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "When should I roll a covered call?", "acceptedAnswer": {"@type": "Answer", "text": "Common triggers are: most of the premium has been captured, the stock has moved close to or above the strike and you want to keep the shares, or expiration is near and you want to keep collecting premium."}}, {"@type": "Question", "name": "Should I roll for a credit or a debit?", "acceptedAnswer": {"@type": "Answer", "text": "Most traders prefer rolling for a net credit. A debit can make sense when the higher strike adds more potential gain than the cost of the roll."}}, {"@type": "Question", "name": "What does profit captured mean?", "acceptedAnswer": {"@type": "Answer", "text": "The share of the original premium you would keep if you bought the call back now. Sold at $1.20 and buy back at $0.30 means 75% captured."}}, {"@type": "Question", "name": "Does rolling avoid assignment?", "acceptedAnswer": {"@type": "Answer", "text": "It usually does, because you close the call that could be assigned. But an in-the-money American-style call can be assigned before you roll it."}}]}]}</script>
+</head>
+<body data-strategy="covered_call">
+<header><div class="wrap"><a class="logo" href="/">OptionPayoff<span>Calc</span></a><span style="color:var(--mut);font-size:13px">Free · No sign-up · Runs in your browser</span></div></header>
+<main class="wrap">
+<nav class="tools" aria-label="Calculators"><a href="/" class="">Options Profit Calculator</a><a href="/covered-call-calculator" class="">Covered Call</a><a href="/cash-secured-put-calculator" class="">Cash-Secured Put</a><a href="/wheel-strategy-calculator" class="">Wheel Strategy</a><a href="/roll-covered-call-calculator" class="on">Roll Calculator</a><a href="/iron-condor-calculator" class="">Iron Condor</a></nav>
+<h1>Roll Covered Call Calculator</h1>
+<p class="sub">Compare closing, holding and rolling your covered call: profit captured, net credit, new strike and annualized return.</p>
+
+<section class="card" style="margin-bottom:16px">
+ <h2>Roll calculator</h2>
+ <div class="row"><div><label for="rS">Stock price now ($)</label><input id="rS" type="number" step="0.01" value="52"></div>
+ <div><label for="rN">Contracts</label><input id="rN" type="number" step="1" min="1" value="1"></div></div>
+ <p style="font-size:13px;font-weight:600;margin:4px 0 6px">Current call (the one you sold)</p>
+ <div class="row" style="grid-template-columns:repeat(4,1fr)">
+  <div><label for="rK1">Strike ($)</label><input id="rK1" type="number" step="0.5" value="50"></div>
+  <div><label for="rP0">Sold for ($/share)</label><input id="rP0" type="number" step="0.01" value="1.20"></div>
+  <div><label for="rP1">Buy back now ($/share)</label><input id="rP1" type="number" step="0.01" value="2.30"></div>
+  <div><label for="rD1">Days left</label><input id="rD1" type="number" step="1" value="5"></div>
+ </div>
+ <p style="font-size:13px;font-weight:600;margin:4px 0 6px">New call (the one you would sell)</p>
+ <div class="row row3">
+  <div><label for="rK2">Strike ($)</label><input id="rK2" type="number" step="0.5" value="52"></div>
+  <div><label for="rP2">Sell for ($/share)</label><input id="rP2" type="number" step="0.01" value="2.80"></div>
+  <div><label for="rD2">Days to expiry</label><input id="rD2" type="number" step="1" value="35"></div>
+ </div>
+ <div class="stats">
+  <div class="stat"><div class="k">Profit captured</div><div class="v" id="rCap">–</div></div>
+  <div class="stat"><div class="k">Call P/L if you close now</div><div class="v" id="rLock">–</div></div>
+  <div class="stat" style="grid-column:span 2"><div class="k">Roll net</div><div class="v" id="rNet">–</div></div>
+  <div class="stat" style="grid-column:span 2"><div class="k">Strike change</div><div class="v" id="rDK" style="font-size:15px">–</div></div>
+  <div class="stat" style="grid-column:span 2"><div class="k">Left in current call</div><div class="v" id="rLeft" style="font-size:15px">–</div></div>
+ </div>
+ <table class="pl"><thead><tr><th>Choice</th><th>Result</th><th>Annualized</th></tr></thead><tbody id="rRows"></tbody></table>
+ <ul id="rTips" style="font-size:13px;color:#2c3946;margin:12px 0 0;padding-left:18px"></ul>
+</section>
+<div class="grid">
+ <section class="card">
+  <h2>Setup</h2>
+  <label for="strat">Strategy</label>
+  <select id="strat">
+   <option value="covered_call">Covered Call</option>
+   <option value="csp">Cash-Secured Put</option>
+   <option value="long_call">Long Call</option>
+   <option value="long_put">Long Put</option>
+   <option value="bull_call">Bull Call Spread</option>
+   <option value="bear_put">Bear Put Spread</option>
+   <option value="iron_condor">Iron Condor</option>
+   <option value="collar">Collar</option>
+   <option value="long_straddle">Long Straddle</option>
+   <option value="custom">Custom (build your own)</option>
+  </select>
+  <p class="desc" id="desc"></p>
+  <div class="row">
+   <div><label for="S">Stock price ($)</label><input id="S" type="number" step="0.01" min="0.01" value="100"></div>
+   <div><label for="iv">Implied volatility (%)</label><input id="iv" type="number" step="0.5" min="1" value="30"></div>
+  </div>
+  <div class="row row3">
+   <div><label for="days">Days to expiry</label><input id="days" type="number" step="1" min="0" value="30"></div>
+   <div><label for="r">Interest rate (%)</label><input id="r" type="number" step="0.1" value="4.5"></div>
+   <div><label for="q">Dividend yield (%)</label><input id="q" type="number" step="0.1" min="0" value="0"></div>
+  </div>
+  <div class="row">
+   <div><label for="n">Contracts</label><input id="n" type="number" step="1" min="1" value="1"></div>
+   <div></div>
+  </div>
+  <h2 style="margin-top:6px">Legs</h2>
+  <table class="legs"><thead><tr><th>Type</th><th>Side</th><th>Qty</th><th>Strike</th><th>Price</th><th></th></tr></thead><tbody id="legs"></tbody></table>
+  <p style="font-size:12px;color:var(--mut);margin:6px 0 0">Option prices are filled with theoretical Black-Scholes values. Type your broker's real price to override (yellow = manual). For stock, "Strike" is your purchase price.</p>
+  <div class="btns">
+   <button class="b" id="addLeg">+ Add leg</button>
+   <button class="b" id="resetP">Reset to theoretical prices</button>
+   <button class="b pri" id="share">Copy share link</button>
+  </div>
+ </section>
+
+ <section class="card">
+  <h2>Results</h2>
+  <div class="stats">
+   <div class="stat"><div class="k" id="netK">Net credit</div><div class="v" id="net">–</div></div>
+   <div class="stat"><div class="k">Max profit</div><div class="v pos" id="maxP">–</div></div>
+   <div class="stat"><div class="k">Max loss</div><div class="v neg" id="maxL">–</div></div>
+   <div class="stat"><div class="k">Probability of profit</div><div class="v" id="pop">–</div></div>
+   <div class="stat" style="grid-column:span 2"><div class="k">Breakeven(s) at expiry</div><div class="v" id="be">–</div></div>
+   <div class="stat" style="grid-column:span 2" id="extraBox"><div class="k" id="extraK">Return on risk</div><div class="v" id="extra">–</div></div>
+  </div>
+  <div class="legend"><span><i></i>P/L at expiration</span><span><i class="d"></i>P/L on selected date</span></div>
+  <div class="slider"><span id="atLbl">Today</span><input id="at" type="range" min="0" max="30" value="0" aria-label="Days from now"></div>
+  <div id="chartBox"><canvas id="chart"></canvas><div id="tip"></div></div>
+  <div class="greeks">
+   <div class="stat"><div class="k">Delta (shares)</div><div class="v" id="gD">–</div></div>
+   <div class="stat"><div class="k">Gamma</div><div class="v" id="gG">–</div></div>
+   <div class="stat"><div class="k">Theta ($/day)</div><div class="v" id="gT">–</div></div>
+   <div class="stat"><div class="k">Vega ($/1% IV)</div><div class="v" id="gV">–</div></div>
+  </div>
+ </section>
+</div>
+<div class="ad-slot"><!-- ADSENSE -->Advertisement</div>
+<section class="card">
+ <h2>P/L by stock price</h2>
+ <table class="pl"><thead><tr><th>Stock price</th><th>Change</th><th>P/L at expiry</th><th>P/L on selected date</th></tr></thead><tbody id="plt"></tbody></table>
+</section>
+<div class="ad-slot"><!-- ADSENSE -->Advertisement</div>
+<article>
+
+<h2>How to use the roll calculator</h2>
+<ol>
+ <li>Enter the current stock price.</li>
+ <li>For the <b>current call</b>: the strike, the price you sold it for, what it costs to buy it back now (the ask) and the days left.</li>
+ <li>For the <b>new call</b>: the strike, the price you can sell it for (the bid) and its days to expiration.</li>
+ <li>Compare the four choices in the table and read the notes below it.</li>
+</ol>
+<h2>What rolling a covered call means</h2>
+<p>Rolling is two trades done together: you buy back the call you sold and sell a new one, usually with a later expiration and often a higher strike. Traders roll to avoid having their shares called away, to collect more premium, or to move the strike up after the stock has risen.</p>
+<h2>Roll up, roll out, or both</h2>
+<ul>
+ <li><b>Roll out</b>: same strike, later date. Usually a credit, because the new call has more time value.</li>
+ <li><b>Roll up</b>: higher strike, same date. Usually a debit, but it adds upside if the shares are called away.</li>
+ <li><b>Roll up and out</b>: higher strike and later date. The most common choice when the stock has moved above the strike.</li>
+</ul>
+<h2>Profit captured and the 50% rule</h2>
+<p>Profit captured = (price sold − buyback price) ÷ price sold. When most of the premium has been captured, the little that is left is not paid for much longer exposure. Many option sellers close or roll once 50% to 80% of the premium is captured instead of waiting for expiration.</p>
+<h2>Time value per day</h2>
+<p>An option's price is intrinsic value plus time value. As an option sold by you nears expiration, its time value shrinks and so does what you can still earn by holding it. The calculator compares the time value per day left in the current call with the new call, so you can see which earns more for each day you keep the position.</p>
+<h2>Things to watch</h2>
+<p>A roll for a debit costs money now. A roll does not turn a losing call into a winner: it moves the position. With American-style options, an in-the-money call with little time value can be assigned early, especially before an ex-dividend date. See also the <a href="/covered-call-calculator">covered call calculator</a> and the <a href="/wheel-strategy-calculator">wheel strategy calculator</a>.</p>
+
+<h2>Frequently asked questions</h2>
+<h3>When should I roll a covered call?</h3>
+<p>Common triggers are: most of the premium has been captured, the stock has moved close to or above the strike and you want to keep the shares, or expiration is near and you want to keep collecting premium.</p>
+<h3>Should I roll for a credit or a debit?</h3>
+<p>Most traders prefer rolling for a net credit. A debit can make sense when the higher strike adds more potential gain than the cost of the roll.</p>
+<h3>What does profit captured mean?</h3>
+<p>The share of the original premium you would keep if you bought the call back now. Sold at $1.20 and buy back at $0.30 means 75% captured.</p>
+<h3>Does rolling avoid assignment?</h3>
+<p>It usually does, because you close the call that could be assigned. But an in-the-money American-style call can be assigned before you roll it.</p>
+<p class="related"><b>More calculators:</b> <a href="/">Options Profit Calculator</a> · <a href="/covered-call-calculator">Covered Call calculator</a> · <a href="/cash-secured-put-calculator">Cash-Secured Put calculator</a> · <a href="/wheel-strategy-calculator">Wheel Strategy calculator</a> · <a href="/iron-condor-calculator">Iron Condor calculator</a></p>
+<p style="font-size:13px;color:var(--mut)"><i>For educational purposes only. Not financial advice. Options involve risk and are not suitable for all investors.</i></p>
+</article>
+</main>
+<footer><div class="wrap">© <span id="yr"></span> OptionPayoffCalc · <a href="/about">About</a> · <a href="/contact">Contact</a> · <a href="/privacy">Privacy</a> · Calculations run locally in your browser.</div></footer>
+<div class="toast" id="toast">Link copied</div>
+<script src="/calc.js"></script>
+</body>
+</html>
