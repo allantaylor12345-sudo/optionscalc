@@ -83,8 +83,8 @@ if($("fExp")){
   const target=exp/wr,rm=Math.pow(1+r,1/12)-1;
   let v=now,months=0;const xs=[isFinite(age)?String(age):"0"],val=[now];
   while(v<target&&months<1200){v=v*(1+rm)+save;months++;if(months%12===0){xs.push(isFinite(age)?String(age+months/12):String(months/12));val.push(v);}}
-  if(months%12!==0){xs.push(isFinite(age)?(age+months/12).toFixed(1):(months/12).toFixed(1));val.push(v);}
-  for(let k=0;k<5;k++){v=v*Math.pow(1+r,1)+save*12;xs.push(isFinite(age)?(age+Math.ceil(months/12)+k+1).toString():String(Math.ceil(months/12)+k+1));val.push(v);}
+  let mm=months,vv=v;while(mm%12!==0){vv=vv*(1+rm)+save;mm++;}if(mm!==months){xs.push(isFinite(age)?String(age+mm/12):String(mm/12));val.push(vv);}
+  for(let k=1;k<=5;k++){for(let j=0;j<12;j++)vv=vv*(1+rm)+save;xs.push(isFinite(age)?String(age+mm/12+k):String(mm/12+k));val.push(vv);}
   const yrs=months/12;
   $("fNum").textContent=usd(target);
   $("fYears").textContent=months>=1200?"100+ years":(yrs<1?Math.ceil(months)+" months":yrs.toFixed(1)+" years");
