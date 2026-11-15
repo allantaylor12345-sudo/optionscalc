@@ -10,14 +10,14 @@
 <meta property="og:description" content="Free covered call calculator: return if called, return if unchanged, annualized yield, breakeven, downside protection and probability of profit, with a payoff chart.">
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://optionpayoffcalc.com/covered-call-calculator">
-<link rel="stylesheet" href="/style.css">
+<link rel="stylesheet" href="/style.css?v=2">
 <!-- ADSENSE: paste the AdSense <script> tag here after approval -->
 <script type="application/ld+json">{"@context": "https://schema.org", "@graph": [{"@type": "WebApplication", "name": "Covered Call Calculator", "url": "https://optionpayoffcalc.com/covered-call-calculator", "applicationCategory": "FinanceApplication", "operatingSystem": "Any", "offers": {"@type": "Offer", "price": "0", "priceCurrency": "USD"}}, {"@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "Is a covered call profitable if the stock goes down?", "acceptedAnswer": {"@type": "Answer", "text": "Only partly. The premium offsets a small decline. If the stock falls more than the premium, the position loses money, though less than owning the shares alone."}}, {"@type": "Question", "name": "What happens if my covered call is assigned?", "acceptedAnswer": {"@type": "Answer", "text": "Your 100 shares are sold at the strike price. You keep the premium plus any gain from your purchase price up to the strike."}}, {"@type": "Question", "name": "What is a good annualized return for covered calls?", "acceptedAnswer": {"@type": "Answer", "text": "It depends on volatility and the stock. Many investors look for 10% to 20% annualized on large, stable stocks; higher yields usually come with higher risk."}}, {"@type": "Question", "name": "Can I roll a covered call?", "acceptedAnswer": {"@type": "Answer", "text": "Yes. Rolling means buying back the current call and selling a new one with a later expiration and/or different strike. Model the new call here to compare outcomes."}}]}]}</script>
 </head>
 <body data-strategy="covered_call">
 <header><div class="wrap"><a class="logo" href="/">OptionPayoff<span>Calc</span></a><span style="color:var(--mut);font-size:13px">Free · No sign-up · Runs in your browser</span></div></header>
 <main class="wrap">
-<nav class="tools" aria-label="Calculators"><a href="/" class="">Options Profit Calculator</a><a href="/covered-call-calculator" class="on">Covered Call</a><a href="/cash-secured-put-calculator" class="">Cash-Secured Put</a><a href="/wheel-strategy-calculator" class="">Wheel Strategy</a><a href="/roll-covered-call-calculator" class="">Roll Calculator</a><a href="/iron-condor-calculator" class="">Iron Condor</a></nav>
+<nav class="tools" aria-label="Calculators"><a href="/" class="">Options Profit Calculator</a><a href="/covered-call-calculator" class="on">Covered Call</a><a href="/cash-secured-put-calculator" class="">Cash-Secured Put</a><a href="/wheel-strategy-calculator" class="">Wheel Strategy</a><a href="/roll-covered-call-calculator" class="">Roll Calculator</a><a href="/iron-condor-calculator" class="">Iron Condor</a><a href="/dividend-reinvestment-calculator" class="">Dividend (DRIP)</a><a href="/yield-on-cost-calculator" class="">Yield on Cost</a><a href="/fire-calculator" class="">FIRE</a></nav>
 <h1>Covered Call Calculator</h1>
 <p class="sub">See your return if called, annualized yield, breakeven and downside cushion before you sell the call.</p>
 <div class="grid">
@@ -119,12 +119,12 @@
 <p>It depends on volatility and the stock. Many investors look for 10% to 20% annualized on large, stable stocks; higher yields usually come with higher risk.</p>
 <h3>Can I roll a covered call?</h3>
 <p>Yes. Rolling means buying back the current call and selling a new one with a later expiration and/or different strike. Model the new call here to compare outcomes.</p>
-<p class="related"><b>More calculators:</b> <a href="/">Options Profit Calculator</a> · <a href="/cash-secured-put-calculator">Cash-Secured Put calculator</a> · <a href="/wheel-strategy-calculator">Wheel Strategy calculator</a> · <a href="/roll-covered-call-calculator">Roll Calculator calculator</a> · <a href="/iron-condor-calculator">Iron Condor calculator</a></p>
+<p class="related"><b>More calculators:</b> <a href="/">Options Profit Calculator</a> · <a href="/cash-secured-put-calculator">Cash-Secured Put calculator</a> · <a href="/wheel-strategy-calculator">Wheel Strategy calculator</a> · <a href="/roll-covered-call-calculator">Roll Calculator calculator</a> · <a href="/iron-condor-calculator">Iron Condor calculator</a> · <a href="/dividend-reinvestment-calculator">Dividend (DRIP) calculator</a> · <a href="/yield-on-cost-calculator">Yield on Cost calculator</a> · <a href="/fire-calculator">FIRE calculator</a></p>
 <p style="font-size:13px;color:var(--mut)"><i>For educational purposes only. Not financial advice. Options involve risk and are not suitable for all investors.</i></p>
 </article>
 </main>
 <footer><div class="wrap">© <span id="yr"></span> OptionPayoffCalc · <a href="/about">About</a> · <a href="/contact">Contact</a> · <a href="/privacy">Privacy</a> · Calculations run locally in your browser.</div></footer>
 <div class="toast" id="toast">Link copied</div>
-<script src="/calc.js"></script>
+<script src="/calc.js?v=3"></script>
 </body>
 </html>

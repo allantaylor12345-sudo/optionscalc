@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Yield on Cost &amp; Average Cost Calculator – Dividend Stocks (Free)</title>
+<meta name="description" content="Free yield on cost and average cost calculator: enter your purchases to get your average price per share, yield on cost, current yield, dividend income and unrealized gain.">
+<link rel="canonical" href="https://optionpayoffcalc.com/yield-on-cost-calculator">
+<meta property="og:title" content="Yield on Cost &amp; Average Cost Calculator – Dividend Stocks (Free)">
+<meta property="og:description" content="Free yield on cost and average cost calculator: enter your purchases to get your average price per share, yield on cost, current yield, dividend income and unrealized gain.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://optionpayoffcalc.com/yield-on-cost-calculator">
+<link rel="stylesheet" href="/style.css?v=2">
+<!-- ADSENSE: paste the AdSense <script> tag here after approval -->
+<script type="application/ld+json">{"@context": "https://schema.org", "@graph": [{"@type": "WebApplication", "name": "Yield on Cost & Average Cost Calculator", "url": "https://optionpayoffcalc.com/yield-on-cost-calculator", "applicationCategory": "FinanceApplication", "operatingSystem": "Any", "offers": {"@type": "Offer", "price": "0", "priceCurrency": "USD"}}, {"@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "What is a good yield on cost?", "acceptedAnswer": {"@type": "Answer", "text": "It depends on how long you've held the stock. After 10 or more years with a growing dividend, many investors see yields on cost of 6% to 10% or more."}}, {"@type": "Question", "name": "Does yield on cost include reinvested dividends?", "acceptedAnswer": {"@type": "Answer", "text": "If you add reinvested dividends as purchases in the table, they are included in your average cost, which lowers your yield on cost slightly but increases your income."}}, {"@type": "Question", "name": "How do I find the annual dividend per share?", "acceptedAnswer": {"@type": "Answer", "text": "Use the most recent dividend multiplied by the number of payments per year, for example a $0.45 quarterly dividend is $1.80 per year."}}, {"@type": "Question", "name": "Is average cost the same as cost basis?", "acceptedAnswer": {"@type": "Answer", "text": "For one stock, yes, before adjustments such as return of capital or stock splits."}}]}]}</script>
+</head>
+<body data-strategy="">
+<header><div class="wrap"><a class="logo" href="/">OptionPayoff<span>Calc</span></a><span style="color:var(--mut);font-size:13px">Free · No sign-up · Runs in your browser</span></div></header>
+<main class="wrap">
+<nav class="tools" aria-label="Calculators"><a href="/" class="">Options Profit Calculator</a><a href="/covered-call-calculator" class="">Covered Call</a><a href="/cash-secured-put-calculator" class="">Cash-Secured Put</a><a href="/wheel-strategy-calculator" class="">Wheel Strategy</a><a href="/roll-covered-call-calculator" class="">Roll Calculator</a><a href="/iron-condor-calculator" class="">Iron Condor</a><a href="/dividend-reinvestment-calculator" class="">Dividend (DRIP)</a><a href="/yield-on-cost-calculator" class="on">Yield on Cost</a><a href="/fire-calculator" class="">FIRE</a></nav>
+<h1>Yield on Cost & Average Cost Calculator</h1>
+<p class="sub">Add your purchases to get your average cost per share, yield on cost and dividend income.</p>
+
+<section class="card" style="margin-bottom:16px">
+ <h2>Your purchases</h2>
+ <table class="legs" style="max-width:420px"><thead><tr><th>Shares</th><th>Price paid ($)</th><th style="width:30px"></th></tr></thead><tbody id="yRows"></tbody></table>
+ <div class="btns"><button class="b" id="yAdd">+ Add purchase</button></div>
+ <div class="row" style="margin-top:14px">
+  <div><label for="yDiv">Annual dividend per share ($)</label><input id="yDiv" type="number" step="0.01" value="1.80"></div>
+  <div><label for="yPx">Current share price ($)</label><input id="yPx" type="number" step="0.01" value="48"></div>
+ </div>
+ <div class="stats">
+  <div class="stat"><div class="k">Average cost per share</div><div class="v" id="yAvg">–</div></div>
+  <div class="stat"><div class="k">Total shares</div><div class="v" id="yShares">–</div></div>
+  <div class="stat"><div class="k">Total invested</div><div class="v" id="yCost">–</div></div>
+  <div class="stat"><div class="k">Yield on cost</div><div class="v pos" id="yYoc">–</div></div>
+  <div class="stat"><div class="k">Current yield</div><div class="v" id="yCur">–</div></div>
+  <div class="stat"><div class="k">Unrealized gain/loss</div><div class="v" id="yGain">–</div></div>
+  <div class="stat" style="grid-column:span 2"><div class="k">Dividend income</div><div class="v" id="yInc">–</div></div>
+ </div>
+</section>
+<div class="ad-slot"><!-- ADSENSE -->Advertisement</div>
+
+<article>
+
+<h2>How to use it</h2>
+<ol>
+ <li>Add each purchase: number of shares and the price you paid.</li>
+ <li>Enter the annual dividend per share (the last quarterly dividend × 4 is a good estimate) and the current share price.</li>
+ <li>Read your average cost, yield on cost, current yield and income.</li>
+</ol>
+<h2>Average cost per share</h2>
+<p>Average cost = total amount invested ÷ total shares. If you bought 50 shares at $40 and 30 at $35, your average cost is ($2,000 + $1,050) ÷ 80 = $38.13.</p>
+<h2>Yield on cost vs current yield</h2>
+<ul>
+ <li><b>Yield on cost</b> = annual dividend per share ÷ your average cost. It shows the return on the money you put in.</li>
+ <li><b>Current yield</b> = annual dividend per share ÷ today's price. It shows what a new buyer gets.</li>
+</ul>
+<p>When a company keeps raising its dividend, your yield on cost climbs year after year even though the current yield may stay flat. That's why long-term dividend investors track it.</p>
+<h2>A note on yield on cost</h2>
+<p>Yield on cost is useful for tracking income growth, but it should not decide whether to keep or sell a stock. To compare investments, use the current yield and the current value of your shares.</p>
+
+<h2>Frequently asked questions</h2>
+<h3>What is a good yield on cost?</h3>
+<p>It depends on how long you&#x27;ve held the stock. After 10 or more years with a growing dividend, many investors see yields on cost of 6% to 10% or more.</p>
+<h3>Does yield on cost include reinvested dividends?</h3>
+<p>If you add reinvested dividends as purchases in the table, they are included in your average cost, which lowers your yield on cost slightly but increases your income.</p>
+<h3>How do I find the annual dividend per share?</h3>
+<p>Use the most recent dividend multiplied by the number of payments per year, for example a $0.45 quarterly dividend is $1.80 per year.</p>
+<h3>Is average cost the same as cost basis?</h3>
+<p>For one stock, yes, before adjustments such as return of capital or stock splits.</p>
+<p class="related"><b>More calculators:</b> <a href="/">Options Profit Calculator</a> · <a href="/covered-call-calculator">Covered Call calculator</a> · <a href="/cash-secured-put-calculator">Cash-Secured Put calculator</a> · <a href="/wheel-strategy-calculator">Wheel Strategy calculator</a> · <a href="/roll-covered-call-calculator">Roll Calculator calculator</a> · <a href="/iron-condor-calculator">Iron Condor calculator</a> · <a href="/dividend-reinvestment-calculator">Dividend (DRIP) calculator</a> · <a href="/fire-calculator">FIRE calculator</a></p>
+<p style="font-size:13px;color:var(--mut)"><i>For educational purposes only. Not financial advice. Investing involves risk.</i></p>
+</article>
+</main>
+<footer><div class="wrap">© <span id="yr"></span> OptionPayoffCalc · <a href="/about">About</a> · <a href="/contact">Contact</a> · <a href="/privacy">Privacy</a> · Calculations run locally in your browser.</div></footer>
+<div class="toast" id="toast">Link copied</div>
+<script src="/stocks.js?v=1"></script>
+</body>
+</html>

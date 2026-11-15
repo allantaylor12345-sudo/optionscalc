@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>FIRE Calculator – Financial Independence Number, Years to FIRE &amp; Coast FIRE (Free)</title>
+<meta name="description" content="Free FIRE calculator: find your financial independence number, how many years until you reach it, your Coast FIRE number and your safe retirement income.">
+<link rel="canonical" href="https://optionpayoffcalc.com/fire-calculator">
+<meta property="og:title" content="FIRE Calculator – Financial Independence Number, Years to FIRE &amp; Coast FIRE (Free)">
+<meta property="og:description" content="Free FIRE calculator: find your financial independence number, how many years until you reach it, your Coast FIRE number and your safe retirement income.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://optionpayoffcalc.com/fire-calculator">
+<link rel="stylesheet" href="/style.css?v=2">
+<!-- ADSENSE: paste the AdSense <script> tag here after approval -->
+<script type="application/ld+json">{"@context": "https://schema.org", "@graph": [{"@type": "WebApplication", "name": "FIRE Calculator", "url": "https://optionpayoffcalc.com/fire-calculator", "applicationCategory": "FinanceApplication", "operatingSystem": "Any", "offers": {"@type": "Offer", "price": "0", "priceCurrency": "USD"}}, {"@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "What does FIRE stand for?", "acceptedAnswer": {"@type": "Answer", "text": "Financial Independence, Retire Early: saving and investing enough that your investments can cover your living expenses."}}, {"@type": "Question", "name": "Is the 4% rule safe?", "acceptedAnswer": {"@type": "Answer", "text": "It comes from historical U.S. data over 30-year retirements. For longer retirements, many people use 3% to 3.5% to add a margin of safety."}}, {"@type": "Question", "name": "Should I use nominal or real returns?", "acceptedAnswer": {"@type": "Answer", "text": "Use real (after-inflation) returns, because your expenses are in today's dollars."}}, {"@type": "Question", "name": "What is Coast FIRE?", "acceptedAnswer": {"@type": "Answer", "text": "The amount you need invested now so that growth alone reaches your FIRE number by your target age, with no more contributions."}}]}]}</script>
+</head>
+<body data-strategy="">
+<header><div class="wrap"><a class="logo" href="/">OptionPayoff<span>Calc</span></a><span style="color:var(--mut);font-size:13px">Free · No sign-up · Runs in your browser</span></div></header>
+<main class="wrap">
+<nav class="tools" aria-label="Calculators"><a href="/" class="">Options Profit Calculator</a><a href="/covered-call-calculator" class="">Covered Call</a><a href="/cash-secured-put-calculator" class="">Cash-Secured Put</a><a href="/wheel-strategy-calculator" class="">Wheel Strategy</a><a href="/roll-covered-call-calculator" class="">Roll Calculator</a><a href="/iron-condor-calculator" class="">Iron Condor</a><a href="/dividend-reinvestment-calculator" class="">Dividend (DRIP)</a><a href="/yield-on-cost-calculator" class="">Yield on Cost</a><a href="/fire-calculator" class="on">FIRE</a></nav>
+<h1>FIRE Calculator</h1>
+<p class="sub">Find your financial independence number, how long it will take to get there, and your Coast FIRE number.</p>
+
+<section class="card" style="margin-bottom:16px">
+ <h2>FIRE calculator</h2>
+ <div class="row row3">
+  <div><label for="fExp">Annual expenses in retirement ($)</label><input id="fExp" type="number" step="1000" value="40000"></div>
+  <div><label for="fNow">Current investments ($)</label><input id="fNow" type="number" step="1000" value="100000"></div>
+  <div><label for="fSave">Monthly savings ($)</label><input id="fSave" type="number" step="100" value="2000"></div>
+ </div>
+ <div class="row row3">
+  <div><label for="fRet">Real annual return (%)</label><input id="fRet" type="number" step="0.5" value="6"></div>
+  <div><label for="fWr">Withdrawal rate (%)</label><input id="fWr" type="number" step="0.1" value="4"></div>
+  <div></div>
+ </div>
+ <div class="row row3">
+  <div><label for="fAge">Your age (optional)</label><input id="fAge" type="number" step="1" value="35"></div>
+  <div><label for="fTarget">Target retirement age (for Coast FIRE)</label><input id="fTarget" type="number" step="1" value="60"></div>
+  <div></div>
+ </div>
+ <div class="stats">
+  <div class="stat"><div class="k">Your FIRE number</div><div class="v pos" id="fNum">–</div></div>
+  <div class="stat"><div class="k">Time to FIRE</div><div class="v" id="fYears">–</div><div class="k" id="fAgeOut"></div></div>
+  <div class="stat"><div class="k">Progress today</div><div class="v" id="fProg">–</div></div>
+  <div class="stat"><div class="k">Safe income</div><div class="v" id="fIncome" style="font-size:15px">–</div></div>
+  <div class="stat" style="grid-column:span 4"><div class="k">Coast FIRE number</div><div class="v" id="fCoast">–</div><div class="k" id="fCoastNote"></div></div>
+ </div>
+ <div style="height:300px"><canvas id="fChart" style="width:100%;height:100%;display:block"></canvas></div>
+</section>
+<div class="ad-slot"><!-- ADSENSE -->Advertisement</div>
+
+<article>
+
+<h2>How to use the FIRE calculator</h2>
+<ol>
+ <li>Enter what you expect to spend per year once you stop working.</li>
+ <li>Enter your current investments and how much you save each month.</li>
+ <li>Use a <b>real</b> return (after inflation), such as 5% to 7% for a stock-heavy portfolio.</li>
+ <li>Pick a withdrawal rate. 4% is the classic rule of thumb; 3% to 3.5% is more conservative for early retirement.</li>
+</ol>
+<h2>Your FIRE number</h2>
+<p>FIRE number = annual expenses ÷ withdrawal rate. With $40,000 of expenses and a 4% withdrawal rate, you need $1,000,000. At that point your portfolio can, historically, fund your spending for decades.</p>
+<h2>Coast FIRE</h2>
+<p>Coast FIRE is the amount you need invested today so that, without saving another dollar, growth alone takes you to your FIRE number by your target retirement age. Once you reach it, you only need to earn enough to cover your current expenses.</p>
+<h2>Living off dividends</h2>
+<p>Some investors prefer to live only on dividends instead of selling shares. In that case, use your portfolio's dividend yield as the withdrawal rate. The <a href="/dividend-reinvestment-calculator">dividend reinvestment calculator</a> shows how that income grows over time, and selling <a href="/covered-call-calculator">covered calls</a> can add more income on top.</p>
+<h2>Assumptions</h2>
+<p>The calculator uses a constant return and constant savings. Real markets go up and down, and the order of returns matters, especially right after you retire. Treat the result as a planning estimate.</p>
+
+<h2>Frequently asked questions</h2>
+<h3>What does FIRE stand for?</h3>
+<p>Financial Independence, Retire Early: saving and investing enough that your investments can cover your living expenses.</p>
+<h3>Is the 4% rule safe?</h3>
+<p>It comes from historical U.S. data over 30-year retirements. For longer retirements, many people use 3% to 3.5% to add a margin of safety.</p>
+<h3>Should I use nominal or real returns?</h3>
+<p>Use real (after-inflation) returns, because your expenses are in today&#x27;s dollars.</p>
+<h3>What is Coast FIRE?</h3>
+<p>The amount you need invested now so that growth alone reaches your FIRE number by your target age, with no more contributions.</p>
+<p class="related"><b>More calculators:</b> <a href="/">Options Profit Calculator</a> · <a href="/covered-call-calculator">Covered Call calculator</a> · <a href="/cash-secured-put-calculator">Cash-Secured Put calculator</a> · <a href="/wheel-strategy-calculator">Wheel Strategy calculator</a> · <a href="/roll-covered-call-calculator">Roll Calculator calculator</a> · <a href="/iron-condor-calculator">Iron Condor calculator</a> · <a href="/dividend-reinvestment-calculator">Dividend (DRIP) calculator</a> · <a href="/yield-on-cost-calculator">Yield on Cost calculator</a></p>
+<p style="font-size:13px;color:var(--mut)"><i>For educational purposes only. Not financial advice. Investing involves risk.</i></p>
+</article>
+</main>
+<footer><div class="wrap">© <span id="yr"></span> OptionPayoffCalc · <a href="/about">About</a> · <a href="/contact">Contact</a> · <a href="/privacy">Privacy</a> · Calculations run locally in your browser.</div></footer>
+<div class="toast" id="toast">Link copied</div>
+<script src="/stocks.js?v=1"></script>
+</body>
+</html>

@@ -10,14 +10,14 @@
 <meta property="og:description" content="Free wheel strategy calculator. Model the full cycle: sell a cash-secured put, get assigned, sell a covered call. See cost basis, profit and annualized return for each scenario.">
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://optionpayoffcalc.com/wheel-strategy-calculator">
-<link rel="stylesheet" href="/style.css">
+<link rel="stylesheet" href="/style.css?v=2">
 <!-- ADSENSE: paste the AdSense <script> tag here after approval -->
 <script type="application/ld+json">{"@context": "https://schema.org", "@graph": [{"@type": "WebApplication", "name": "Wheel Strategy Calculator", "url": "https://optionpayoffcalc.com/wheel-strategy-calculator", "applicationCategory": "FinanceApplication", "operatingSystem": "Any", "offers": {"@type": "Offer", "price": "0", "priceCurrency": "USD"}}, {"@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "Is the wheel strategy profitable?", "acceptedAnswer": {"@type": "Answer", "text": "It earns premium in flat or rising markets. In a sharp decline it loses money like owning the stock, reduced by the premiums collected."}}, {"@type": "Question", "name": "Which stocks are best for the wheel?", "acceptedAnswer": {"@type": "Answer", "text": "Liquid stocks or ETFs you would be comfortable holding long term, with active option markets and tight bid/ask spreads."}}, {"@type": "Question", "name": "Should I sell the covered call below my cost basis?", "acceptedAnswer": {"@type": "Answer", "text": "Usually not, because assignment would lock in a loss. Many wheel traders only sell calls at or above their cost basis."}}, {"@type": "Question", "name": "How often can I run the wheel?", "acceptedAnswer": {"@type": "Answer", "text": "As often as each leg expires. Weekly and monthly expirations are both common; compare them using the annualized return."}}]}]}</script>
 </head>
 <body data-strategy="csp">
 <header><div class="wrap"><a class="logo" href="/">OptionPayoff<span>Calc</span></a><span style="color:var(--mut);font-size:13px">Free · No sign-up · Runs in your browser</span></div></header>
 <main class="wrap">
-<nav class="tools" aria-label="Calculators"><a href="/" class="">Options Profit Calculator</a><a href="/covered-call-calculator" class="">Covered Call</a><a href="/cash-secured-put-calculator" class="">Cash-Secured Put</a><a href="/wheel-strategy-calculator" class="on">Wheel Strategy</a><a href="/roll-covered-call-calculator" class="">Roll Calculator</a><a href="/iron-condor-calculator" class="">Iron Condor</a></nav>
+<nav class="tools" aria-label="Calculators"><a href="/" class="">Options Profit Calculator</a><a href="/covered-call-calculator" class="">Covered Call</a><a href="/cash-secured-put-calculator" class="">Cash-Secured Put</a><a href="/wheel-strategy-calculator" class="on">Wheel Strategy</a><a href="/roll-covered-call-calculator" class="">Roll Calculator</a><a href="/iron-condor-calculator" class="">Iron Condor</a><a href="/dividend-reinvestment-calculator" class="">Dividend (DRIP)</a><a href="/yield-on-cost-calculator" class="">Yield on Cost</a><a href="/fire-calculator" class="">FIRE</a></nav>
 <h1>Wheel Strategy Calculator</h1>
 <p class="sub">Model the full wheel: cash-secured put, assignment and covered call. See your cost basis and annualized return in each scenario.</p>
 
@@ -141,12 +141,12 @@
 <p>Usually not, because assignment would lock in a loss. Many wheel traders only sell calls at or above their cost basis.</p>
 <h3>How often can I run the wheel?</h3>
 <p>As often as each leg expires. Weekly and monthly expirations are both common; compare them using the annualized return.</p>
-<p class="related"><b>More calculators:</b> <a href="/">Options Profit Calculator</a> · <a href="/covered-call-calculator">Covered Call calculator</a> · <a href="/cash-secured-put-calculator">Cash-Secured Put calculator</a> · <a href="/roll-covered-call-calculator">Roll Calculator calculator</a> · <a href="/iron-condor-calculator">Iron Condor calculator</a></p>
+<p class="related"><b>More calculators:</b> <a href="/">Options Profit Calculator</a> · <a href="/covered-call-calculator">Covered Call calculator</a> · <a href="/cash-secured-put-calculator">Cash-Secured Put calculator</a> · <a href="/roll-covered-call-calculator">Roll Calculator calculator</a> · <a href="/iron-condor-calculator">Iron Condor calculator</a> · <a href="/dividend-reinvestment-calculator">Dividend (DRIP) calculator</a> · <a href="/yield-on-cost-calculator">Yield on Cost calculator</a> · <a href="/fire-calculator">FIRE calculator</a></p>
 <p style="font-size:13px;color:var(--mut)"><i>For educational purposes only. Not financial advice. Options involve risk and are not suitable for all investors.</i></p>
 </article>
 </main>
 <footer><div class="wrap">© <span id="yr"></span> OptionPayoffCalc · <a href="/about">About</a> · <a href="/contact">Contact</a> · <a href="/privacy">Privacy</a> · Calculations run locally in your browser.</div></footer>
 <div class="toast" id="toast">Link copied</div>
-<script src="/calc.js"></script>
+<script src="/calc.js?v=3"></script>
 </body>
 </html>

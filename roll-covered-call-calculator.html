@@ -10,14 +10,14 @@
 <meta property="og:description" content="Free covered call roll calculator: profit captured, net credit or debit, strike change, annualized return of the new call, and a close vs hold vs roll comparison.">
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://optionpayoffcalc.com/roll-covered-call-calculator">
-<link rel="stylesheet" href="/style.css">
+<link rel="stylesheet" href="/style.css?v=2">
 <!-- ADSENSE: paste the AdSense <script> tag here after approval -->
 <script type="application/ld+json">{"@context": "https://schema.org", "@graph": [{"@type": "WebApplication", "name": "Roll Covered Call Calculator", "url": "https://optionpayoffcalc.com/roll-covered-call-calculator", "applicationCategory": "FinanceApplication", "operatingSystem": "Any", "offers": {"@type": "Offer", "price": "0", "priceCurrency": "USD"}}, {"@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "When should I roll a covered call?", "acceptedAnswer": {"@type": "Answer", "text": "Common triggers are: most of the premium has been captured, the stock has moved close to or above the strike and you want to keep the shares, or expiration is near and you want to keep collecting premium."}}, {"@type": "Question", "name": "Should I roll for a credit or a debit?", "acceptedAnswer": {"@type": "Answer", "text": "Most traders prefer rolling for a net credit. A debit can make sense when the higher strike adds more potential gain than the cost of the roll."}}, {"@type": "Question", "name": "What does profit captured mean?", "acceptedAnswer": {"@type": "Answer", "text": "The share of the original premium you would keep if you bought the call back now. Sold at $1.20 and buy back at $0.30 means 75% captured."}}, {"@type": "Question", "name": "Does rolling avoid assignment?", "acceptedAnswer": {"@type": "Answer", "text": "It usually does, because you close the call that could be assigned. But an in-the-money American-style call can be assigned before you roll it."}}]}]}</script>
 </head>
 <body data-strategy="covered_call">
 <header><div class="wrap"><a class="logo" href="/">OptionPayoff<span>Calc</span></a><span style="color:var(--mut);font-size:13px">Free · No sign-up · Runs in your browser</span></div></header>
 <main class="wrap">
-<nav class="tools" aria-label="Calculators"><a href="/" class="">Options Profit Calculator</a><a href="/covered-call-calculator" class="">Covered Call</a><a href="/cash-secured-put-calculator" class="">Cash-Secured Put</a><a href="/wheel-strategy-calculator" class="">Wheel Strategy</a><a href="/roll-covered-call-calculator" class="on">Roll Calculator</a><a href="/iron-condor-calculator" class="">Iron Condor</a></nav>
+<nav class="tools" aria-label="Calculators"><a href="/" class="">Options Profit Calculator</a><a href="/covered-call-calculator" class="">Covered Call</a><a href="/cash-secured-put-calculator" class="">Cash-Secured Put</a><a href="/wheel-strategy-calculator" class="">Wheel Strategy</a><a href="/roll-covered-call-calculator" class="on">Roll Calculator</a><a href="/iron-condor-calculator" class="">Iron Condor</a><a href="/dividend-reinvestment-calculator" class="">Dividend (DRIP)</a><a href="/yield-on-cost-calculator" class="">Yield on Cost</a><a href="/fire-calculator" class="">FIRE</a></nav>
 <h1>Roll Covered Call Calculator</h1>
 <p class="sub">Compare closing, holding and rolling your covered call: profit captured, net credit, new strike and annualized return.</p>
 
@@ -148,12 +148,12 @@
 <p>The share of the original premium you would keep if you bought the call back now. Sold at $1.20 and buy back at $0.30 means 75% captured.</p>
 <h3>Does rolling avoid assignment?</h3>
 <p>It usually does, because you close the call that could be assigned. But an in-the-money American-style call can be assigned before you roll it.</p>
-<p class="related"><b>More calculators:</b> <a href="/">Options Profit Calculator</a> · <a href="/covered-call-calculator">Covered Call calculator</a> · <a href="/cash-secured-put-calculator">Cash-Secured Put calculator</a> · <a href="/wheel-strategy-calculator">Wheel Strategy calculator</a> · <a href="/iron-condor-calculator">Iron Condor calculator</a></p>
+<p class="related"><b>More calculators:</b> <a href="/">Options Profit Calculator</a> · <a href="/covered-call-calculator">Covered Call calculator</a> · <a href="/cash-secured-put-calculator">Cash-Secured Put calculator</a> · <a href="/wheel-strategy-calculator">Wheel Strategy calculator</a> · <a href="/iron-condor-calculator">Iron Condor calculator</a> · <a href="/dividend-reinvestment-calculator">Dividend (DRIP) calculator</a> · <a href="/yield-on-cost-calculator">Yield on Cost calculator</a> · <a href="/fire-calculator">FIRE calculator</a></p>
 <p style="font-size:13px;color:var(--mut)"><i>For educational purposes only. Not financial advice. Options involve risk and are not suitable for all investors.</i></p>
 </article>
 </main>
 <footer><div class="wrap">© <span id="yr"></span> OptionPayoffCalc · <a href="/about">About</a> · <a href="/contact">Contact</a> · <a href="/privacy">Privacy</a> · Calculations run locally in your browser.</div></footer>
 <div class="toast" id="toast">Link copied</div>
-<script src="/calc.js"></script>
+<script src="/calc.js?v=3"></script>
 </body>
 </html>

@@ -10,14 +10,14 @@
 <meta property="og:description" content="Free options profit calculator. Visualize P/L for covered calls, cash-secured puts, spreads, iron condors and straddles. Black-Scholes Greeks, breakevens, probability of profit and annualized return.">
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://optionpayoffcalc.com/">
-<link rel="stylesheet" href="/style.css">
+<link rel="stylesheet" href="/style.css?v=2">
 <!-- ADSENSE: paste the AdSense <script> tag here after approval -->
 <script type="application/ld+json">{"@context": "https://schema.org", "@graph": [{"@type": "WebApplication", "name": "Options Profit Calculator", "url": "https://optionpayoffcalc.com/", "applicationCategory": "FinanceApplication", "operatingSystem": "Any", "offers": {"@type": "Offer", "price": "0", "priceCurrency": "USD"}}, {"@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "How is the probability of profit calculated?", "acceptedAnswer": {"@type": "Answer", "text": "The stock price at expiration is modeled as lognormal, using the implied volatility you entered. The calculator adds up the probability of every price at which the strategy finishes with a profit. It is an estimate, not a guarantee."}}, {"@type": "Question", "name": "Are the option prices real market quotes?", "acceptedAnswer": {"@type": "Answer", "text": "No. They are theoretical Black-Scholes values from your inputs. For exact results, type the real prices from your broker into the Price column."}}, {"@type": "Question", "name": "Does this include commissions and taxes?", "acceptedAnswer": {"@type": "Answer", "text": "No. Results are before commissions, fees and taxes. American-style early assignment is not modeled."}}, {"@type": "Question", "name": "Is my data sent anywhere?", "acceptedAnswer": {"@type": "Answer", "text": "No. Everything runs in your browser. The share link only stores your inputs in the URL."}}]}]}</script>
 </head>
 <body data-strategy="covered_call">
 <header><div class="wrap"><a class="logo" href="/">OptionPayoff<span>Calc</span></a><span style="color:var(--mut);font-size:13px">Free · No sign-up · Runs in your browser</span></div></header>
 <main class="wrap">
-<nav class="tools" aria-label="Calculators"><a href="/" class="on">Options Profit Calculator</a><a href="/covered-call-calculator" class="">Covered Call</a><a href="/cash-secured-put-calculator" class="">Cash-Secured Put</a><a href="/wheel-strategy-calculator" class="">Wheel Strategy</a><a href="/roll-covered-call-calculator" class="">Roll Calculator</a><a href="/iron-condor-calculator" class="">Iron Condor</a></nav>
+<nav class="tools" aria-label="Calculators"><a href="/" class="on">Options Profit Calculator</a><a href="/covered-call-calculator" class="">Covered Call</a><a href="/cash-secured-put-calculator" class="">Cash-Secured Put</a><a href="/wheel-strategy-calculator" class="">Wheel Strategy</a><a href="/roll-covered-call-calculator" class="">Roll Calculator</a><a href="/iron-condor-calculator" class="">Iron Condor</a><a href="/dividend-reinvestment-calculator" class="">Dividend (DRIP)</a><a href="/yield-on-cost-calculator" class="">Yield on Cost</a><a href="/fire-calculator" class="">FIRE</a></nav>
 <h1>Options Profit Calculator</h1>
 <p class="sub">Payoff chart, breakevens, probability of profit and Greeks for covered calls, cash-secured puts, spreads, iron condors and more.</p>
 <div class="grid">
@@ -127,12 +127,12 @@
 <p>No. Results are before commissions, fees and taxes. American-style early assignment is not modeled.</p>
 <h3>Is my data sent anywhere?</h3>
 <p>No. Everything runs in your browser. The share link only stores your inputs in the URL.</p>
-<p class="related"><b>More calculators:</b> <a href="/covered-call-calculator">Covered Call calculator</a> · <a href="/cash-secured-put-calculator">Cash-Secured Put calculator</a> · <a href="/wheel-strategy-calculator">Wheel Strategy calculator</a> · <a href="/roll-covered-call-calculator">Roll Calculator calculator</a> · <a href="/iron-condor-calculator">Iron Condor calculator</a></p>
+<p class="related"><b>More calculators:</b> <a href="/covered-call-calculator">Covered Call calculator</a> · <a href="/cash-secured-put-calculator">Cash-Secured Put calculator</a> · <a href="/wheel-strategy-calculator">Wheel Strategy calculator</a> · <a href="/roll-covered-call-calculator">Roll Calculator calculator</a> · <a href="/iron-condor-calculator">Iron Condor calculator</a> · <a href="/dividend-reinvestment-calculator">Dividend (DRIP) calculator</a> · <a href="/yield-on-cost-calculator">Yield on Cost calculator</a> · <a href="/fire-calculator">FIRE calculator</a></p>
 <p style="font-size:13px;color:var(--mut)"><i>For educational purposes only. Not financial advice. Options involve risk and are not suitable for all investors.</i></p>
 </article>
 </main>
 <footer><div class="wrap">© <span id="yr"></span> OptionPayoffCalc · <a href="/about">About</a> · <a href="/contact">Contact</a> · <a href="/privacy">Privacy</a> · Calculations run locally in your browser.</div></footer>
 <div class="toast" id="toast">Link copied</div>
-<script src="/calc.js"></script>
+<script src="/calc.js?v=3"></script>
 </body>
 </html>

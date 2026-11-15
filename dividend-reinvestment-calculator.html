@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Dividend Reinvestment Calculator (DRIP) – Future Value &amp; Dividend Income (Free)</title>
+<meta name="description" content="Free DRIP calculator: see how reinvesting dividends grows your portfolio and your dividend income over time, with dividend growth, monthly contributions, taxes and a year-by-year table.">
+<link rel="canonical" href="https://optionpayoffcalc.com/dividend-reinvestment-calculator">
+<meta property="og:title" content="Dividend Reinvestment Calculator (DRIP) – Future Value &amp; Dividend Income (Free)">
+<meta property="og:description" content="Free DRIP calculator: see how reinvesting dividends grows your portfolio and your dividend income over time, with dividend growth, monthly contributions, taxes and a year-by-year table.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://optionpayoffcalc.com/dividend-reinvestment-calculator">
+<link rel="stylesheet" href="/style.css?v=2">
+<!-- ADSENSE: paste the AdSense <script> tag here after approval -->
+<script type="application/ld+json">{"@context": "https://schema.org", "@graph": [{"@type": "WebApplication", "name": "Dividend Reinvestment (DRIP) Calculator", "url": "https://optionpayoffcalc.com/dividend-reinvestment-calculator", "applicationCategory": "FinanceApplication", "operatingSystem": "Any", "offers": {"@type": "Offer", "price": "0", "priceCurrency": "USD"}}, {"@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "Is it better to reinvest dividends?", "acceptedAnswer": {"@type": "Answer", "text": "If you don't need the income now, reinvesting usually leads to a larger portfolio and larger future income because of compounding. Turn DRIP off in the calculator to compare."}}, {"@type": "Question", "name": "What dividend growth rate should I use?", "acceptedAnswer": {"@type": "Answer", "text": "Many established dividend growers have raised dividends 4% to 8% a year historically. Use a lower number to be conservative."}}, {"@type": "Question", "name": "Are reinvested dividends taxed?", "acceptedAnswer": {"@type": "Answer", "text": "In a regular taxable account, yes: dividends are taxed in the year they are paid even if reinvested. Set the tax field to 0% for tax-advantaged accounts."}}, {"@type": "Question", "name": "How much do I need to live off dividends?", "acceptedAnswer": {"@type": "Answer", "text": "Divide your yearly expenses by your portfolio's dividend yield. With $40,000 of expenses and a 4% yield, you'd need about $1,000,000. See the FIRE calculator for more."}}]}]}</script>
+</head>
+<body data-strategy="">
+<header><div class="wrap"><a class="logo" href="/">OptionPayoff<span>Calc</span></a><span style="color:var(--mut);font-size:13px">Free · No sign-up · Runs in your browser</span></div></header>
+<main class="wrap">
+<nav class="tools" aria-label="Calculators"><a href="/" class="">Options Profit Calculator</a><a href="/covered-call-calculator" class="">Covered Call</a><a href="/cash-secured-put-calculator" class="">Cash-Secured Put</a><a href="/wheel-strategy-calculator" class="">Wheel Strategy</a><a href="/roll-covered-call-calculator" class="">Roll Calculator</a><a href="/iron-condor-calculator" class="">Iron Condor</a><a href="/dividend-reinvestment-calculator" class="on">Dividend (DRIP)</a><a href="/yield-on-cost-calculator" class="">Yield on Cost</a><a href="/fire-calculator" class="">FIRE</a></nav>
+<h1>Dividend Reinvestment (DRIP) Calculator</h1>
+<p class="sub">See how reinvested dividends, dividend growth and monthly contributions grow your portfolio and your passive income.</p>
+
+<section class="card" style="margin-bottom:16px">
+ <h2>Dividend reinvestment calculator</h2>
+ <div class="row row3">
+  <div><label for="dInit">Initial investment ($)</label><input id="dInit" type="number" step="100" value="10000"></div>
+  <div><label for="dMonthly">Monthly contribution ($)</label><input id="dMonthly" type="number" step="50" value="500"></div>
+  <div><label for="dPrice">Share price ($)</label><input id="dPrice" type="number" step="0.01" value="50"></div>
+ </div>
+ <div class="row row3">
+  <div><label for="dYield">Dividend yield (%)</label><input id="dYield" type="number" step="0.1" value="4"></div>
+  <div><label for="dDivG">Dividend growth (%/yr)</label><input id="dDivG" type="number" step="0.5" value="5"></div>
+  <div><label for="dPriceG">Share price growth (%/yr)</label><input id="dPriceG" type="number" step="0.5" value="4"></div>
+ </div>
+ <div class="row row3">
+  <div><label for="dYears">Years</label><input id="dYears" type="number" step="1" min="1" max="60" value="20"></div>
+  <div><label for="dTax">Tax on dividends (%)</label><input id="dTax" type="number" step="1" min="0" value="15"></div>
+  <div><label for="dFreq">Paid</label><select id="dFreq"><option value="4">Quarterly</option><option value="12">Monthly</option><option value="2">Semi-annually</option><option value="1">Annually</option></select></div>
+ </div>
+ <label style="display:flex;gap:8px;align-items:center;font-size:14px;color:var(--ink);margin-bottom:12px"><input id="dDrip" type="checkbox" checked style="width:auto"> Reinvest dividends (DRIP)</label>
+ <div class="stats">
+  <div class="stat"><div class="k">Portfolio value</div><div class="v pos" id="dOutValue">–</div></div>
+  <div class="stat"><div class="k">Total invested</div><div class="v" id="dOutContrib">–</div></div>
+  <div class="stat"><div class="k">Dividend income (final year, net)</div><div class="v" id="dOutIncome">–</div></div>
+  <div class="stat"><div class="k">Per month</div><div class="v" id="dOutMonthly">–</div></div>
+  <div class="stat" style="grid-column:span 2"><div class="k">Yield on cost (final year)</div><div class="v" id="dOutYoc">–</div></div>
+  <div class="stat" style="grid-column:span 2"><div class="k">Total dividends received (net)</div><div class="v" id="dOutDivs">–</div></div>
+ </div>
+ <div class="legend"><span><i></i>Portfolio value</span><span><i class="d" style="border-top-color:#9aa5b1"></i>Total invested</span></div>
+ <div style="height:300px"><canvas id="dChart" style="width:100%;height:100%;display:block"></canvas></div>
+</section>
+<div class="ad-slot"><!-- ADSENSE -->Advertisement</div>
+<section class="card">
+ <h2>Year by year</h2>
+ <div style="overflow-x:auto"><table class="pl"><thead><tr><th>Year</th><th>Invested</th><th>Value</th><th>Dividends (gross)</th><th>Dividends (net)</th><th>Yield on cost</th><th>Shares</th></tr></thead><tbody id="dRows"></tbody></table></div>
+</section>
+
+<article>
+
+<h2>How to use the DRIP calculator</h2>
+<ol>
+ <li>Enter what you invest today and what you add every month.</li>
+ <li>Enter the stock's (or fund's) dividend yield and how fast you expect the dividend and the share price to grow.</li>
+ <li>Set your tax on dividends (0% for tax-advantaged accounts) and how often dividends are paid.</li>
+ <li>Turn reinvestment on and off to see the difference DRIP makes.</li>
+</ol>
+<h2>What dividend reinvestment does</h2>
+<p>With a dividend reinvestment plan (DRIP), every dividend buys more shares. Those new shares pay dividends too, so your share count grows even without new money. Over long periods, this compounding, plus companies raising their dividends, is what turns a modest yield into a large income.</p>
+<h2>Yield on cost</h2>
+<p>Yield on cost is your annual dividend income divided by the money you actually invested. A stock bought with a 3% yield that grows its dividend 7% a year will pay close to 6% on your original cost after 10 years.</p>
+<h2>Assumptions</h2>
+<p>The calculator assumes constant yield, dividend growth and price growth, and buys fractional shares. Real dividends can be cut, and prices fluctuate. Use conservative numbers and treat the result as an estimate, not a forecast.</p>
+
+<h2>Frequently asked questions</h2>
+<h3>Is it better to reinvest dividends?</h3>
+<p>If you don&#x27;t need the income now, reinvesting usually leads to a larger portfolio and larger future income because of compounding. Turn DRIP off in the calculator to compare.</p>
+<h3>What dividend growth rate should I use?</h3>
+<p>Many established dividend growers have raised dividends 4% to 8% a year historically. Use a lower number to be conservative.</p>
+<h3>Are reinvested dividends taxed?</h3>
+<p>In a regular taxable account, yes: dividends are taxed in the year they are paid even if reinvested. Set the tax field to 0% for tax-advantaged accounts.</p>
+<h3>How much do I need to live off dividends?</h3>
+<p>Divide your yearly expenses by your portfolio&#x27;s dividend yield. With $40,000 of expenses and a 4% yield, you&#x27;d need about $1,000,000. See the FIRE calculator for more.</p>
+<p class="related"><b>More calculators:</b> <a href="/">Options Profit Calculator</a> · <a href="/covered-call-calculator">Covered Call calculator</a> · <a href="/cash-secured-put-calculator">Cash-Secured Put calculator</a> · <a href="/wheel-strategy-calculator">Wheel Strategy calculator</a> · <a href="/roll-covered-call-calculator">Roll Calculator calculator</a> · <a href="/iron-condor-calculator">Iron Condor calculator</a> · <a href="/yield-on-cost-calculator">Yield on Cost calculator</a> · <a href="/fire-calculator">FIRE calculator</a></p>
+<p style="font-size:13px;color:var(--mut)"><i>For educational purposes only. Not financial advice. Investing involves risk.</i></p>
+</article>
+</main>
+<footer><div class="wrap">© <span id="yr"></span> OptionPayoffCalc · <a href="/about">About</a> · <a href="/contact">Contact</a> · <a href="/privacy">Privacy</a> · Calculations run locally in your browser.</div></footer>
+<div class="toast" id="toast">Link copied</div>
+<script src="/stocks.js?v=1"></script>
+</body>
+</html>
